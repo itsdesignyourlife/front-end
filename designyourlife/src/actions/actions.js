@@ -18,7 +18,7 @@ export function actionFunction(){
 export const login = creds => dispatch => {
     dispatch({ type: LOGIN_START });
     return axios
-      .post('https://usemytechstuff.herokuapp.com/api/auth/login', creds)
+      .post('https://dyl-backend.herokuapp.com/api/auth/login', creds)
       .then(res => {
         localStorage.setItem('token', res.data.token);
         dispatch({ type: LOGIN_SUCCESS, payload: res.data });
@@ -33,11 +33,11 @@ export const login = creds => dispatch => {
   export const register = creds => dispatch => {
     dispatch({ type: REGISTER_START });
     return axios
-      .post('https://usemytechstuff.herokuapp.com/api/auth/register', creds)
+      .post('https://dyl-backend.herokuapp.com/api/auth/register', creds)
       .then(res => {
-        dispatch({ type: REGISTER_SUCCESS, payload: res.data });
+        dispatch({ type: REGISTER_SUCCESS});
       })
       .catch(err => {
-        dispatch({ type: REGISTER_FAILURE, payload: err.response.message });
+        dispatch({ type: REGISTER_FAILURE});
       });
   };
