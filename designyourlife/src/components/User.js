@@ -10,7 +10,7 @@ class User extends Component {
     render(){
         return(
             <div>
-                <h1>User</h1>
+                <h1>USER COMPONENT</h1>
             </div>
         )
     }
