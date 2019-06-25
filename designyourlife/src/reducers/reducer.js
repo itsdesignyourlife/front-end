@@ -3,7 +3,8 @@ import {
     REGISTER_START, REGISTER_SUCCESS, REGISTER_FAILURE,
     GET_START, GET_SUCCESS, GET_FAILURE,
     GET1_START, GET1_SUCCESS, GET1_FAILURE,
-    POST_START, POST_SUCCESS, POST_FAILURE} from '../actions/actions';
+    POST_START, POST_SUCCESS, POST_FAILURE,
+    GETUSERPOSTS_START, GETUSERPOSTS_SUCCESS, GETUSERPOSTS_FAILURE} from '../actions/actions';
 
 
 
@@ -27,9 +28,8 @@ export default function reducer (state = defaultState, action) {
         case LOGIN_FAILURE:
             return {
                 ...state
-            }  
-            
-            
+            }   
+        //################################
         case REGISTER_START:
             return {
                 ...state
@@ -41,9 +41,8 @@ export default function reducer (state = defaultState, action) {
         case REGISTER_FAILURE:
             return {
                 ...state
-            }   
-            
-            
+            }     
+        //################################
         case GET_START:
             return {
                 ...state
@@ -57,7 +56,21 @@ export default function reducer (state = defaultState, action) {
                 return {
                     ...state
                 }
-
+        //################################
+        case GETUSERPOSTS_START:
+            return {
+                ...state
+            }           
+        case GETUSERPOSTS_SUCCESS:
+            return {
+                ...state,
+                post: action.payload
+            }           
+        case GETUSERPOSTS_FAILURE:
+                return {
+                    ...state
+                }           
+        //################################
         case GET1_START:
             return {
                 ...state
@@ -65,14 +78,13 @@ export default function reducer (state = defaultState, action) {
         case GET1_SUCCESS:
             return {
                 ...state,
-                post: action.payload
+                
             }           
         case GET1_FAILURE:
                 return {
                     ...state
-                }
-
-
+                }      
+        //################################
         case POST_START:
                 return {
                     ...state
@@ -85,6 +97,7 @@ export default function reducer (state = defaultState, action) {
                 return {
                     ...state
                 }
+        //################################
         default:
             return state;
     }

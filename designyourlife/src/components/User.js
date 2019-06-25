@@ -1,7 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
 import {connect} from "react-redux";
-import {getPosts, getPostsById, newPost} from '../actions/actions';
+import {getPosts, getPostsByUserId, getPostById, newPost} from '../actions/actions';
 
 class User extends Component {
     state = {
@@ -17,8 +17,17 @@ class User extends Component {
         this.props.getPosts()
     }
 
-    idSubmit = id => {
-        this.props.getPostsById(this.state.id)
+    getPostsByUserid = e => {
+        e.preventDefault()
+        this.props.getPostsByUserId(this.state.user_id)
+        this.setState({
+            user_id: ""
+        })
+    }
+
+    getPostById = e => {
+        e.preventDefault()
+        this.props.getPostById(this.state.id)
         this.setState({
             id: ""
         })
@@ -62,15 +71,25 @@ class User extends Component {
                         </div>
                     )
                 })} */}
-                <h1>GET BY USER ID TEST</h1>
+                <h1>GET POSTS BY USER ID TEST</h1>
                 <input 
                     type = "text"
-                    placeholder = "requestedId"
+                    placeholder = "user_id"
+                    name = "user_id"
+                    value = {this.state.user_id}
+                    onChange = {this.changeHandler}
+                />
+                <button onClick = {this.getPostsByUserid} >Search by id</button>
+
+                <h1>GET POST BY POST ID</h1>
+                <input
+                    type = "text"
+                    placeholder = "id"
                     name = "id"
                     value = {this.state.id}
                     onChange = {this.changeHandler}
                 />
-                <button onClick = {this.idSubmit} >Search by id</button>
+                <button onClick = {this.getPostById}>SUBMIT</button>
 
                 <h1>NEW POST TEST</h1>
                 <input
@@ -123,4 +142,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {getPosts, getPostsById, newPost})(User);
+export default connect(mapStateToProps, {getPosts, getPostsByUserId, newPost, getPostById})(User);
