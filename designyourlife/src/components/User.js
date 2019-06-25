@@ -1,7 +1,8 @@
 import React from 'react';
 import {Component} from 'react';
 import {connect} from "react-redux";
-import {getPosts, getPostsByUserId, getPostById, newPost} from '../actions/actions';
+import {getPosts, getPostsByUserId, getPostById, newPost, updatePost, deletePost} from '../actions/actions';
+import moment from 'moment';
 
 class User extends Component {
     state = {
@@ -47,7 +48,8 @@ class User extends Component {
             postTitle: this.state.postTitle,
             postBody: this.state.postBody,
             engagementScore: parseInt(this.state.engagementScore, 10),
-            energyScore: parseInt(this.state.energyScore, 10)
+            energyScore: parseInt(this.state.energyScore, 10),
+            createdAt: moment().format('MMMM Do YYYY, h:mm:ss a')
         }
         this.props.newPost(postObj)
         this.setState({
@@ -58,6 +60,63 @@ class User extends Component {
             engagementScore: "",
             energyScore: ""
         })
+    }
+
+    updatePost = e => {
+        console.log("UPDATE TRIGGERED")
+        e.preventDefault()
+        let updateId = parseInt(this.state.id, 10);
+        let postObj = {
+            user_id: parseInt(this.state.user_id, 10),
+            postTitle: this.state.postTitle,
+            postBody: this.state.postBody,
+            engagementScore: parseInt(this.state.engagementScore, 10),
+            energyScore: parseInt(this.state.energyScore, 10)
+        }
+        this.props.updatePost(updateId, postObj)
+        this.setState({
+            id: "",
+            user_id: "",
+            postTitle: "",
+            postBody: "",
+            engagementScore: "",
+            energyScore: ""
+        })
+    }
+
+    deletePost = e => {
+        console.log("DELETE TRIGGERED")
+        e.preventDefault()
+        let deleteId = parseInt(this.state.id, 10);
+        this.props.deletePost(deleteId)
+        this.setState({
+            id: "",
+            user_id: "",
+            postTitle: "",
+            postBody: "",
+            engagementScore: "",
+            energyScore: ""
+        })
+    }
+
+    timeStampCreator(){
+        let date = new Date()
+      
+        let month = date.getMonth() + 1;
+        let day = date.getDate();
+        let year = date.getFullYear();
+        let hour = (date.getHours() > 12)?(date.getHours() - 12):(date.getHour);
+        let minutes = date.getMinutes();
+        let ampm =  (date.getHours() > 12)?("pm"):("am")
+      
+        let timeStamp = `${month}/${day}/${year} at ${hour}:${minutes}${ampm}`
+      
+        return timeStamp
+      }
+      
+      timeStampTest(){
+        let timestamp = `${moment().format('MMMM Do YYYY, h:mm:ss a')}`
+        console.log(timestamp)
     }
 
 
@@ -71,9 +130,10 @@ class User extends Component {
                         </div>
                     )
                 })} */}
-                <h1>GET POSTS BY USER ID TEST</h1>
+                <h1>ALL POSTS ALREADY LOADED IN CONSOLE</h1>
+                <h1>GET POSTS BY USER ID</h1>
                 <input 
-                    type = "text"
+                    type = "number"
                     placeholder = "user_id"
                     name = "user_id"
                     value = {this.state.user_id}
@@ -81,9 +141,9 @@ class User extends Component {
                 />
                 <button onClick = {this.getPostsByUserid} >Search by id</button>
 
-                <h1>GET POST BY POST ID</h1>
+                <h1>Get Individual Post By Post ID</h1>
                 <input
-                    type = "text"
+                    type = "number"
                     placeholder = "id"
                     name = "id"
                     value = {this.state.id}
@@ -91,7 +151,7 @@ class User extends Component {
                 />
                 <button onClick = {this.getPostById}>SUBMIT</button>
 
-                <h1>NEW POST TEST</h1>
+                <h1>New post</h1>
                 <input
                     type = "number"
                     placeholder = "user_id"
@@ -127,10 +187,20 @@ class User extends Component {
                     value = {this.state.energyScore}
                     onChange = {this.changeHandler}
                  />
-                 <button onClick = {this.newPost}>POST!</button>
                  
-                
-                
+                 <button onClick = {this.newPost}>POST!</button>
+                 <button onClick = {this.updatePost}>UPDATE!</button>
+                 <button onClick = {this.deletePost}>DELETE</button>
+                 
+                 <h2>Post ID for update and delete</h2>
+                 <input
+                    type = "number"
+                    placeholder = "postID for update only"
+                    name = "id"
+                    value = {this.state.id}
+                    onChange = {this.changeHandler}
+                 />
+                <button onClick = {this.timeStampTest}>TEST TIMESTAMP</button>
             </div>
         )
     }
@@ -142,4 +212,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {getPosts, getPostsByUserId, newPost, getPostById})(User);
+export default connect(mapStateToProps, {getPosts, getPostsByUserId, newPost, getPostById, updatePost, deletePost})(User);

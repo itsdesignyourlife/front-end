@@ -26,7 +26,13 @@ export const POST_START = 'POST_START';
 export const POST_SUCCESS = 'POST_SUCCESS';
 export const POST_FAILURE = 'POST_FAILURE';
 
+export const UPDATE_START = 'UPDATE_START';
+export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
+export const UPDATE_FAILURE = 'UPDATE_FAILURE';
 
+export const DELETE_START = 'DELETE_START';
+export const DELETE_SUCCESS = 'DELETE_SUCCESS';
+export const DELETE_FAILURE = 'DELETE_FAILURE';
 
 
 
@@ -98,7 +104,7 @@ export const getPostById = (id) => (dispatch) => {
   .get(`https://dyl-backend.herokuapp.com/api/posts/${id}`)
   .then(res => {
       console.log("GET1 RES: ", res)
-      dispatch({type: GET1_SUCCESS, payload: res.data})
+      dispatch({type: GET1_SUCCESS})
   })
   .catch(err => {
       console.log("GET1 ERR: ", err)
@@ -115,10 +121,42 @@ export const newPost = postObj => dispatch => {
     .post('https://dyl-backend.herokuapp.com/api/posts', postObj)
     .then(res => {
       console.log("POST RES: ", res)
-      dispatch({ type: POST_SUCCESS, payload: res.data });
+      dispatch({ type: POST_SUCCESS, payload: res.data.post });
     })
     .catch(err => {
       console.log("POST ERR: ", err)
       dispatch({ type: POST_FAILURE});
+    });
+};
+
+
+export const updatePost = (id, postObj) => dispatch => {
+  console.log("id: ", id)
+  dispatch({ type: UPDATE_START });
+  axiosAuth()
+    .put(`https://dyl-backend.herokuapp.com/api/posts/${id}`, postObj)
+    .then(res => {
+      console.log("UPDATE RES: ", res)
+      dispatch({ type: UPDATE_SUCCESS});
+    })
+    .catch(err => {
+      console.log("UPDATE ERR: ", err)
+      dispatch({ type: UPDATE_FAILURE});
+    });
+};
+
+
+export const deletePost = (id) => dispatch => {
+  console.log("id: ", id)
+  dispatch({ type: DELETE_START });
+  axiosAuth()
+    .delete(`https://dyl-backend.herokuapp.com/api/posts/${id}`)
+    .then(res => {
+      console.log("DELETE RES: ", res)
+      dispatch({ type: DELETE_SUCCESS});
+    })
+    .catch(err => {
+      console.log("DELETE ERR: ", err)
+      dispatch({ type: DELETE_FAILURE});
     });
 };

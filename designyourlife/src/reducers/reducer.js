@@ -4,7 +4,9 @@ import {
     GET_START, GET_SUCCESS, GET_FAILURE,
     GET1_START, GET1_SUCCESS, GET1_FAILURE,
     POST_START, POST_SUCCESS, POST_FAILURE,
-    GETUSERPOSTS_START, GETUSERPOSTS_SUCCESS, GETUSERPOSTS_FAILURE} from '../actions/actions';
+    GETUSERPOSTS_START, GETUSERPOSTS_SUCCESS, GETUSERPOSTS_FAILURE,
+    UPDATE_START, UPDATE_SUCCESS, UPDATE_FAILURE,
+    DELETE_START, DELETE_SUCCESS, DELETE_FAILURE} from '../actions/actions';
 
 
 
@@ -98,6 +100,34 @@ export default function reducer (state = defaultState, action) {
                     ...state
                 }
         //################################
+        case UPDATE_START:
+            return {
+                ...state
+            }           
+        case UPDATE_SUCCESS:
+            return {
+                ...state
+            }           
+        case UPDATE_FAILURE:
+                return {
+                    ...state
+                }
+
+         //################################
+         case DELETE_START:
+            return {
+                ...state
+            }           
+        case DELETE_SUCCESS:
+            return {
+                ...state
+            }           
+        case DELETE_FAILURE:
+                return {
+                    ...state
+                }
+         //################################
+    
         default:
             return state;
     }
