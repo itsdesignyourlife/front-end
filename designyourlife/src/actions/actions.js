@@ -18,6 +18,10 @@ export const GET1_START = 'GET1_START';
 export const GET1_SUCCESS = 'GET1_SUCCESS';
 export const GET1_FAILURE = 'GET1_FAILURE';
 
+export const POST_START = 'POST_START';
+export const POST_SUCCESS = 'POST_SUCCESS';
+export const POST_FAILURE = 'POST_FAILURE';
+
 
 
 
@@ -36,7 +40,6 @@ export const login = creds => dispatch => {
   };
 
 
-
   export const register = creds => dispatch => {
     dispatch({ type: REGISTER_START });
     return axios
@@ -50,9 +53,6 @@ export const login = creds => dispatch => {
   };
 
   
-
-
-
   export const getPosts = () => (dispatch) => {
     dispatch ({type: GET_START})
     axiosAuth()
@@ -64,7 +64,6 @@ export const login = creds => dispatch => {
         console.log(err)
         dispatch({type: GET_FAILURE})
     })
-
 }
 
 export const getPostsById = (id) => (dispatch) => {
@@ -80,5 +79,18 @@ export const getPostsById = (id) => (dispatch) => {
       console.log(err)
       dispatch({type: GET1_FAILURE})
   })
-
 }
+
+export const newPost = postObj => dispatch => {
+  console.log("postObj: ", postObj)
+  dispatch({ type: POST_START });
+  axiosAuth()
+    .post('https://dyl-backend.herokuapp.com/api/posts', postObj)
+    .then(res => {
+      dispatch({ type: POST_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log("err: ", err)
+      dispatch({ type: POST_FAILURE});
+    });
+};

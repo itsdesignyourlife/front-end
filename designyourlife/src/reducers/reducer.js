@@ -2,7 +2,8 @@ import {
     LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE,
     REGISTER_START, REGISTER_SUCCESS, REGISTER_FAILURE,
     GET_START, GET_SUCCESS, GET_FAILURE,
-    GET1_START, GET1_SUCCESS, GET1_FAILURE} from '../actions/actions';
+    GET1_START, GET1_SUCCESS, GET1_FAILURE,
+    POST_START, POST_SUCCESS, POST_FAILURE} from '../actions/actions';
 
 
 
@@ -67,6 +68,20 @@ export default function reducer (state = defaultState, action) {
                 post: action.payload
             }           
         case GET1_FAILURE:
+                return {
+                    ...state
+                }
+
+
+        case POST_START:
+                return {
+                    ...state
+                }           
+        case POST_SUCCESS:
+            return {
+                ...state
+            }           
+        case POST_FAILURE:
                 return {
                     ...state
                 }
