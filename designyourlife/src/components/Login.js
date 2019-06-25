@@ -11,6 +11,7 @@ class Login extends React.Component {
     }
   
     login = e => {
+      console.log("login trigger")
       e.preventDefault();
       // localStorage.setItem("token", "abc")
       this.props.login(this.state.credentials)
@@ -19,9 +20,13 @@ class Login extends React.Component {
           console.log("supposedly login successful")
           this.props.history.push('/');
         })
+        .catch((err) => {
+          console.log("HERE IT IS!!!!", err)
+        })
     }
 
     register = e => {
+      console.log("register trigger")
       e.preventDefault();
       this.props.register(this.state.credentials)
         .then(() => {

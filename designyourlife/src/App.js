@@ -11,17 +11,8 @@ function App() {
   return (
     <div>
       <h1>APP COMPONENT</h1>
-      <ul>
-        {/* <li>
-          <Link to="/public">Public Page</Link>
-        </li> */}
-        <li>
-          {/* <Link to="/user">User Page</Link> */}
-        </li>
-      </ul>
-      {/* <Route path="/public" component={Public}/> */}
-      <Route path="/login" component={Login}/>
-      <PrivateRoute path='/' component={User} />
+      <Route path = "/login" component = {Login}/>
+      <PrivateRoute exact path = "/" component = {User} />
     </div>
   );
 }
