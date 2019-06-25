@@ -14,6 +14,10 @@ export const GET_START = 'GET_START';
 export const GET_SUCCESS = 'GET_SUCCESS';
 export const GET_FAILURE = 'GET_FAILURE';
 
+export const GET1_START = 'GET1_START';
+export const GET1_SUCCESS = 'GET1_SUCCESS';
+export const GET1_FAILURE = 'GET1_FAILURE';
+
 
 
 
@@ -54,12 +58,27 @@ export const login = creds => dispatch => {
     axiosAuth()
     .get('https://dyl-backend.herokuapp.com/api/posts')
     .then(res => {
-        console.log("getPayload: ", res.data)
         dispatch({type: GET_SUCCESS, payload: res.data})
     })
     .catch(err => {
         console.log(err)
         dispatch({type: GET_FAILURE})
     })
+
+}
+
+export const getPostsById = (id) => (dispatch) => {
+  console.log(id)
+  dispatch ({type: GET1_START})
+  axiosAuth()
+  .get(`https://dyl-backend.herokuapp.com/api/posts/${id}`)
+  .then(res => {
+      console.log("get1 res: ", res)
+      dispatch({type: GET1_SUCCESS, payload: res.data})
+  })
+  .catch(err => {
+      console.log(err)
+      dispatch({type: GET1_FAILURE})
+  })
 
 }

@@ -1,14 +1,16 @@
 import {
     LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE,
     REGISTER_START, REGISTER_SUCCESS, REGISTER_FAILURE,
-    GET_START, GET_SUCCESS, GET_FAILURE} from '../actions/actions';
+    GET_START, GET_SUCCESS, GET_FAILURE,
+    GET1_START, GET1_SUCCESS, GET1_FAILURE} from '../actions/actions';
 
 
 
 
 
 let defaultState = {
-    posts: []
+    posts: [],
+    post: []
 }
 
 export default function reducer (state = defaultState, action) {
@@ -51,6 +53,20 @@ export default function reducer (state = defaultState, action) {
                 posts: action.payload
             }           
         case GET_FAILURE:
+                return {
+                    ...state
+                }
+
+        case GET1_START:
+            return {
+                ...state
+            }           
+        case GET1_SUCCESS:
+            return {
+                ...state,
+                post: action.payload
+            }           
+        case GET1_FAILURE:
                 return {
                     ...state
                 }
