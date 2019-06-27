@@ -64,85 +64,84 @@ class Post extends Component {
 
     timeStampCreator(){
         let date = new Date()
-      
         let month = date.getMonth() + 1;
         let day = date.getDate();
         let year = date.getFullYear();
         let hour = (date.getHours() > 12)?(date.getHours() - 12):(date.getHour);
         let minutes = date.getMinutes();
         let ampm =  (date.getHours() > 12)?("pm"):("am")
-      
         let timeStamp = `${month}/${day}/${year} at ${hour}:${minutes}${ampm}`
-      
+        console.log("timeStap: ",timeStamp)
         return timeStamp
       }
       
-      timeStampTest(){
-        let timestamp = `${moment().format('MMMM Do YYYY, h:mm:ss a')}`
-        console.log(timestamp)
+    timeStampTest(){
+        console.log(moment().subtract(7, 'days').calendar()) // mm/dd/yyyy past
+        console.log(moment().format('L')) // mm/dd/yyyy current
+        console.log(moment().add(7, 'days').calendar()) // mm/dd/yyyy future 
     }
 
 
     render(){
+        
+
         return(
             <div className = "post">
+                <div>
+                    <div>
+                        <h1>POST</h1>
+                        <h4>POST TITLE: {this.props.post.postTitle}</h4>
+                        <h5>ENGAGEMENT: {this.props.post.engagementScore}</h5>
+                        <h5>ENERGY: {this.props.post.energyScore}</h5>
+                        <h5>USER_ID: {this.props.post.user_id}</h5>
+                        <h5>ID: {this.props.post.id}</h5>
+                        <h5>TIMESTAMP: {moment().format('L')}</h5>
+                    </div>
                     <div>
                         <div>
-                            <h1>POST</h1>
-                            <h4>POST TITLE: {this.props.post.postTitle}</h4>
-                            <h5>ENGAGEMENT: {this.props.post.engagementScore}</h5>
-                            <h5>ENERGY: {this.props.post.energyScore}</h5>
-                            <h5>USER_ID: {this.props.post.user_id}</h5>
-                            <h5>ID: {this.props.post.id}</h5>
-
-                        </div>
-                        <div>
-                            <div>
-                                {this.props.post.postBody}
-                            </div>
+                            {this.props.post.postBody}
                         </div>
                     </div>
-                    <div>
-                        <button onClick = {this.deletePost}>DELETE</button>
-                    </div>
-                    <div className = "inputContainer">
-                    <div>
-                        <input
-                            type = "text"
-                            placeholder = "postTitle"
-                            name = "postTitle"
-                            value = {this.state.postTitle}
-                            onChange = {this.changeHandler}
-                        />
-                        <input
-                            type = "number"
-                            placeholder = "engagementScore"
-                            name = "engagementScore"
-                            value = {this.state.engagementScore}
-                            onChange = {this.changeHandler}
-                        />
-                        <input
-                            type = "number"
-                            placeholder = "energyScore"
-                            name = "energyScore"
-                            value = {this.state.energyScore}
-                            onChange = {this.changeHandler}
-                        />
-                    </div>
-                    <div>
-                        <input
-                            type = "text"
-                            placeholder = "postBody"
-                            name = "postBody"
-                            value = {this.state.postBody}
-                            onChange = {this.changeHandler}
-                        />
-                    </div>
-                    <button onClick = {this.updatePost}>UPDATE!</button>
                 </div>
+                <div>
+                    <button onClick = {this.deletePost}>DELETE</button>
                 </div>
-
-                
+                <div className = "inputContainer">
+                <div>
+                    <input
+                        type = "text"
+                        placeholder = "postTitle"
+                        name = "postTitle"
+                        value = {this.state.postTitle}
+                        onChange = {this.changeHandler}
+                    />
+                    <input
+                        type = "number"
+                        placeholder = "engagementScore"
+                        name = "engagementScore"
+                        value = {this.state.engagementScore}
+                        onChange = {this.changeHandler}
+                    />
+                    <input
+                        type = "number"
+                        placeholder = "energyScore"
+                        name = "energyScore"
+                        value = {this.state.energyScore}
+                        onChange = {this.changeHandler}
+                    />
+                </div>
+                <div>
+                    <input
+                        type = "text"
+                        placeholder = "postBody"
+                        name = "postBody"
+                        value = {this.state.postBody}
+                        onChange = {this.changeHandler}
+                    />
+                </div>
+                <button onClick = {this.updatePost}>UPDATE!</button>
+                </div>
+            </div>
         )
     }
 }

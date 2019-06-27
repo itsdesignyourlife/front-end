@@ -6,10 +6,13 @@ import {
     POST_START, POST_SUCCESS, POST_FAILURE,
     GETUSERPOSTS_START, GETUSERPOSTS_SUCCESS, GETUSERPOSTS_FAILURE,
     UPDATE_START, UPDATE_SUCCESS, UPDATE_FAILURE,
-    DELETE_START, DELETE_SUCCESS, DELETE_FAILURE} from '../actions/actions';
+    DELETE_START, DELETE_SUCCESS, DELETE_FAILURE, 
+    NEW_CYCLE_UPDATE_START, NEW_CYCLE_UPDATE_SUCCESS, NEW_CYCLE_UPDATE_FAILURE,
+    CREATELOG_START, CREATELOG_SUCCESS, CREATELOG_FAILURE,
+    CREATELOGENTRY_START, CREATELOGENTRY_SUCCESS, CREATELOGENTRY_FAILURE,} from '../actions/actions';
 
-
-
+   
+    
 
 
 let defaultState = {
@@ -24,13 +27,16 @@ let defaultState = {
     gettingUserPosts: false,
     gettingUserPostsError: "",
 
+    //NEED TO BE CREATED
 
-    
+    endOfWeekCycle: "",
+    logs: [
 
+    ],
 }
 
 export default function reducer (state = defaultState, action) {
-   switch(action.type){
+    switch(action.type){
         case LOGIN_START:
            return {
                ...state,
@@ -78,9 +84,9 @@ export default function reducer (state = defaultState, action) {
                 ...state
             }           
         case GET_FAILURE:
-                return {
-                    ...state
-                }
+            return {
+                ...state
+            }
         //################################
         case GETUSERPOSTS_START:
             return {
@@ -109,23 +115,23 @@ export default function reducer (state = defaultState, action) {
                 
             }           
         case GET1_FAILURE:
-                return {
-                    ...state
-                }      
+            return {
+                ...state
+            }      
         //################################
         case POST_START:
-                return {
-                    ...state
-                }           
+            return {
+                ...state
+            }           
         case POST_SUCCESS:
             return {
                 ...state,
                 posts: action.payload
             }           
         case POST_FAILURE:
-                return {
-                    ...state
-                }
+            return {
+                ...state
+            }
         //################################
         case UPDATE_START:
             return {
@@ -137,12 +143,11 @@ export default function reducer (state = defaultState, action) {
                 posts: action.payload
             }           
         case UPDATE_FAILURE:
-                return {
-                    ...state
-                }
-
+            return {
+                ...state
+            }
          //################################
-         case DELETE_START:
+        case DELETE_START:
             return {
                 ...state
             }           
@@ -151,10 +156,56 @@ export default function reducer (state = defaultState, action) {
                 ...state
             }           
         case DELETE_FAILURE:
-                return {
-                    ...state
-                }
+            return {
+                ...state
+            }
          //################################
+         case NEW_CYCLE_UPDATE_START:
+            return {
+                ...state
+            }           
+        case NEW_CYCLE_UPDATE_SUCCESS:
+            return {
+                ...state,
+                endOfWeekCycle: "" //action.payload <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+            }           
+        case NEW_CYCLE_UPDATE_FAILURE:
+            return {
+                ...state
+            }
+
+        //##################################
+        
+        case CREATELOG_START:
+            return {
+                ...state
+            }           
+        case CREATELOG_SUCCESS:
+            return {
+                ...state,
+                logs: "" //<---------------------------action.payload
+            }           
+        case CREATELOG_FAILURE:
+            return {
+                ...state
+            }
+
+        //##################################
+        
+        case CREATELOGENTRY_START:
+            return {
+                ...state
+            }           
+        case CREATELOGENTRY_SUCCESS:
+            return {
+                ...state,
+                logs: "" //<---------------------------action.payload
+            }           
+        case CREATELOGENTRY_FAILURE:
+            return {
+                ...state
+            }
+
     
         default:
             return state;

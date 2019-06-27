@@ -1,5 +1,6 @@
 import axios from 'axios';
 import axiosAuth from '../utils/axiosAuth'
+import moment from 'moment';
 
 
 export const LOGIN_START = 'LOGIN_START';
@@ -34,7 +35,18 @@ export const DELETE_START = 'DELETE_START';
 export const DELETE_SUCCESS = 'DELETE_SUCCESS';
 export const DELETE_FAILURE = 'DELETE_FAILURE';
 
+export const NEW_CYCLE_UPDATE_START = 'NEW_CYCLE_UPDATE_START';
+export const NEW_CYCLE_UPDATE_SUCCESS = 'NEW_CYCLE_UPDATE_SUCCESS';
+export const NEW_CYCLE_UPDATE_FAILURE = 'NEW_CYCLE_UPDATE_FAILURE';
 
+
+export const CREATELOG_START = 'CREATELOG_START';
+export const CREATELOG_SUCCESS = 'CREATELOG_SUCCESS';
+export const CREATELOG_FAILURE = 'CREATELOG_FAILURE';
+
+export const CREATELOGENTRY_START = 'CREATELOGENTRY_START';
+export const CREATELOGENTRY_SUCCESS = 'CREATELOGENTRY_SUCCESS';
+export const CREATELOGENTRY_FAILURE = 'CREATELOGENTRY_FAILURE';
 
 export const login = creds => dispatch => {
     dispatch({ type: LOGIN_START });
@@ -161,5 +173,52 @@ export const deletePost = (id, user_id) => dispatch => {
     .catch(err => {
       console.log("DELETE ERR: ", err)
       dispatch({ type: DELETE_FAILURE});
+    });
+};
+
+
+export const updateEndOfWeekCycle = () => dispatch => {
+  console.log("NEW CYCLE: ", moment().add(7, 'days').calendar())
+  dispatch({ type: NEW_CYCLE_UPDATE_START });
+  axiosAuth()
+    .put(`CREATE_AN_ENDPOINT_FOR_ME`, moment().add(7, 'days').calendar())
+    .then(res => {
+      console.log("NEW CYCLE UPDATE RES: ", res)
+      dispatch({ type: NEW_CYCLE_UPDATE_SUCCESS});
+    })
+    .catch(err => {
+      console.log("NEW CYCLE UPDATE ERR: ", err)
+      dispatch({ type: NEW_CYCLE_UPDATE_FAILURE});
+    });
+};
+
+
+export const createLog = () => dispatch => {
+  dispatch({ type: CREATELOG_START });
+  let newLog = []
+  axiosAuth()
+    .post('URL_TO_LOGS_ARRAY', newLog)
+    .then(res => {
+      console.log("CREATELOG RES: ", res)
+      dispatch({ type: CREATELOG_SUCCESS}); //<-----PAYLOAD IS ENTIRE LOGS ARRAY
+    })
+    .catch(err => {
+      console.log("CREATELOG ERR: ", err)
+      dispatch({ type: CREATELOG_FAILURE});
+    });
+};
+
+export const createLogEntry = (idToBePosted, currentLogNumber) => dispatch => {
+  dispatch({ type: CREATELOGENTRY_START });
+  
+  axiosAuth()
+    .post(`URL_TO_LOG_WITH_${currentLogNumber}`, idToBePosted)
+    .then(res => {
+      console.log("CREATELOGENTRY RES: ", res)
+      dispatch({ type: CREATELOGENTRY_SUCCESS}); //<-----PAYLOAD IS ENTIRE LOGS ARRAY
+    })
+    .catch(err => {
+      console.log("CREATELOGENTRY ERR: ", err)
+      dispatch({ type: CREATELOGENTRY_FAILURE});
     });
 };

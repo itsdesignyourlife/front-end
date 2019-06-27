@@ -44,8 +44,8 @@ class Login extends React.Component {
     render() {
       return (
         <div>
-          <h1>LOGIN COMPONENT</h1>
-          <form onSubmit={this.login}>
+          <h1 className = "className" >LOGIN COMPONENT</h1>
+          <form id = "idName" onSubmit={this.login}>
             <input
               type="text"
               name="username"

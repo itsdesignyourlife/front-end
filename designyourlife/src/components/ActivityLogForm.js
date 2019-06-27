@@ -1,7 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
 import {connect} from "react-redux";
-import {getPosts, getPostsByUserId, getPostById, newPost, updatePost, deletePost} from '../actions/actions';
+import {getPosts, getPostsByUserId, getPostById, newPost, updatePost, deletePost, updateEndOfWeekCycle, createLog, createLogEntry} from '../actions/actions';
 import moment from 'moment';
 
 class ActivityLogForm extends Component {
@@ -15,6 +15,54 @@ class ActivityLogForm extends Component {
     }
 
 
+    isDateLaterThanCDate(date, cDate) {
+        //input date format: dd/mm/yyyy
+        let dateSplit = date.split("/");
+        //=====================
+        let mm = dateSplit[0];
+        let dd = dateSplit[1];
+        let yyyy = dateSplit[2];
+        //====================
+        let cDateSplit = cDate.split("/");
+        //=====================
+        let cmm = cDateSplit[0];
+        let cdd = cDateSplit[1];
+        let cyyyy = cDateSplit[2];
+        //======================
+        if(yyyy > cyyyy){
+          return true
+        } else if (yyyy === cyyyy && mm > cmm){
+          return true
+        } else if (yyyy === cyyyy && mm === cmm && dd > cdd) {
+          return true
+        } else {
+          return false
+        }
+    }
+
+
+    componentDidUpdate(){
+        //reflectionLogPostIds arrays Assignment
+
+        //GET endOfWeekCycle from server and set to state
+        console.log("UPDATE CYCLE DATE TRIGGER")
+        if (this.props.endOfWeekCycle === ""){
+            this.props.updateEndOfWeekCycle();
+        }
+        if (this.props.logs.length === 0 || this.isDateLaterThanCDate(this.props.endOfWeekCycle, moment().format('L'))){
+            this.props.createLog()
+        }
+        if (this.props.logs.length === 0){
+            return null
+        }else{
+            if (this.props.latestLog[this.props.latestLog.length -1] !== this.props.posts[this.props.posts.length -1].id){
+                let idToBePosted = this.props.posts[this.props.posts.length -1].id
+                let currentLogNumber = this.props.logs.length
+                this.props.createLogEntry(idToBePosted, currentLogNumber)
+            }
+        }
+    }
+
     changeHandler = e => {
         e.preventDefault();
         this.setState({
@@ -22,8 +70,18 @@ class ActivityLogForm extends Component {
         })
     }
 
+   
+
+    timeStampTest(){
+        console.log(moment().subtract(7, 'days').calendar()) // mm/dd/yyyy past
+        console.log(moment().format('L')) // mm/dd/yyyy current
+        console.log(moment().add(7, 'days').calendar()) // mm/dd/yyyy future 
+    }
+
+
     newPost = e => {
         e.preventDefault()
+        //POSTOBJECT
         let postObj = {
             username: localStorage.getItem('username'),
             user_id: parseInt(this.props.user_id, 10),
@@ -35,9 +93,6 @@ class ActivityLogForm extends Component {
         }
         console.log("POST TRIGGERED")
         this.props.newPost(postObj, parseInt(this.props.user_id, 10),)
-        // console.log("GET USER POSTS TRIGGERED")
-        // this.props.getPostsByUserId(this.props.user_id)
-       
         this.setState({
             id: "",
             user_id: "",
@@ -46,7 +101,14 @@ class ActivityLogForm extends Component {
             engagementScore: "",
             energyScore: ""
         })
+    
+        
+
+
     }
+
+
+
 
 
     timeStampCreator(){
@@ -64,10 +126,7 @@ class ActivityLogForm extends Component {
         return timeStamp
       }
 
-      timeStampTest(){
-        let timestamp = `${moment().format('MMMM Do YYYY, h:mm:ss a')}`
-        console.log(timestamp)
-    }
+  
 
 
     render(){
@@ -127,7 +186,10 @@ function mapStateToProps(state){
         posts: state.posts,
         user_id: state.user_id,
         username: state.username,
+        endOfWeekCycle: state.endOfWeekCycle,
+        logs: state.logs,
+        latestLog: state.logs[state.logs.length -1]
     }
 }     
 
-export default connect(mapStateToProps, {getPosts, getPostsByUserId, newPost, getPostById, updatePost, deletePost})(ActivityLogForm);
+export default connect(mapStateToProps, {getPosts, getPostsByUserId, newPost, getPostById, updatePost, deletePost, updateEndOfWeekCycle, createLog, createLogEntry})(ActivityLogForm);
