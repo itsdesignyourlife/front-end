@@ -17,7 +17,7 @@ class User extends Component {
 
     componentDidMount(){
         console.log("GET USER POSTS TRIGGERED")
-        this.props.getPosts()
+        // this.props.getPosts()
         this.props.getPostsByUserId(localStorage.getItem('user_id'))
     }
 

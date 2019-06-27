@@ -60,8 +60,10 @@ class ActivityLogPosts extends Component {
 
 
     render(){
+        console.log("user_id: ", this.props.user_id)
         return(
             <div>
+                <h1> user_id: {this.props.user_id}</h1>
                 <div className = "posts">
                    {this.props.posts.map(post => {
                        return (

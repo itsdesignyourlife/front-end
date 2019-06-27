@@ -25,13 +25,15 @@ class Post extends Component {
     updatePost = e => {
         console.log("UPDATE TRIGGERED")
         e.preventDefault()
-        let updateId = parseInt(this.state.id, 10);
+        let updateId = parseInt(this.props.post.id, 10);
         let postObj = {
-            user_id: parseInt(this.state.user_id, 10),
+            username: localStorage.getItem('username'),
+            user_id: parseInt(this.props.user_id, 10),
             postTitle: this.state.postTitle,
             postBody: this.state.postBody,
             engagementScore: parseInt(this.state.engagementScore, 10),
-            energyScore: parseInt(this.state.energyScore, 10)
+            energyScore: parseInt(this.state.energyScore, 10),
+            createdAt: moment().format('MMMM Do YYYY, h:mm:ss a')
         }
         this.props.updatePost(updateId, postObj)
         this.setState({
@@ -47,8 +49,8 @@ class Post extends Component {
     deletePost = e => {
         console.log("DELETE TRIGGERED")
         e.preventDefault()
-        let deleteId = parseInt(this.props.post.id, 10);
-        this.props.deletePost(deleteId)
+        let deleteId = parseInt(this.props.post.id, 10); //props passed from ActivityLog
+        this.props.deletePost(deleteId, this.props.user_id)
         // this.props.getPostsByUserId(this.props.user_id)
         this.setState({
             id: "",
@@ -87,9 +89,12 @@ class Post extends Component {
                     <div>
                         <div>
                             <h1>POST</h1>
-                            <h4>{this.props.post.postTitle}</h4>
-                            <h5>{this.props.post.engagementScore}</h5>
-                            <h5>{this.props.post.energyScore}</h5>
+                            <h4>POST TITLE: {this.props.post.postTitle}</h4>
+                            <h5>ENGAGEMENT: {this.props.post.engagementScore}</h5>
+                            <h5>ENERGY: {this.props.post.energyScore}</h5>
+                            <h5>USER_ID: {this.props.post.user_id}</h5>
+                            <h5>ID: {this.props.post.id}</h5>
+
                         </div>
                         <div>
                             <div>
@@ -98,10 +103,46 @@ class Post extends Component {
                         </div>
                     </div>
                     <div>
-                        <button onClick = {this.updatePost}>UPDATE!</button>
                         <button onClick = {this.deletePost}>DELETE</button>
                     </div>
+                    <div className = "inputContainer">
+                    <div>
+                        <input
+                            type = "text"
+                            placeholder = "postTitle"
+                            name = "postTitle"
+                            value = {this.state.postTitle}
+                            onChange = {this.changeHandler}
+                        />
+                        <input
+                            type = "number"
+                            placeholder = "engagementScore"
+                            name = "engagementScore"
+                            value = {this.state.engagementScore}
+                            onChange = {this.changeHandler}
+                        />
+                        <input
+                            type = "number"
+                            placeholder = "energyScore"
+                            name = "energyScore"
+                            value = {this.state.energyScore}
+                            onChange = {this.changeHandler}
+                        />
+                    </div>
+                    <div>
+                        <input
+                            type = "text"
+                            placeholder = "postBody"
+                            name = "postBody"
+                            value = {this.state.postBody}
+                            onChange = {this.changeHandler}
+                        />
+                    </div>
+                    <button onClick = {this.updatePost}>UPDATE!</button>
                 </div>
+                </div>
+
+                
         )
     }
 }

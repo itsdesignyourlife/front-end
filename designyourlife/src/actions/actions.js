@@ -84,7 +84,7 @@ export const login = creds => dispatch => {
 }
 
 export const getPostsByUserId = (user_id) => (dispatch) => {
-  console.log("getPosts user_id:", user_id)
+  console.log("getPostsByUserId user_id:", user_id)
   dispatch ({type: GETUSERPOSTS_START})
   axiosAuth()
   .get(`https://dyl-backend.herokuapp.com/api/home/${user_id}`)
@@ -140,7 +140,7 @@ export const updatePost = (id, postObj) => dispatch => {
     .put(`https://dyl-backend.herokuapp.com/api/posts/${id}`, postObj)
     .then(res => {
       console.log("UPDATE RES: ", res)
-      dispatch({ type: UPDATE_SUCCESS});
+      dispatch({ type: UPDATE_SUCCESS, payload: res.data.posts});
     })
     .catch(err => {
       console.log("UPDATE ERR: ", err)
@@ -149,11 +149,11 @@ export const updatePost = (id, postObj) => dispatch => {
 };
 
 
-export const deletePost = (id) => dispatch => {
-  console.log("Delete id: ", id)
+export const deletePost = (id, user_id) => dispatch => {
+  console.log("Delete id: ", id, "User_id: ", user_id)
   dispatch({ type: DELETE_START });
   axiosAuth()
-    .delete(`https://dyl-backend.herokuapp.com/api/posts/${id}`)
+    .delete(`https://dyl-backend.herokuapp.com/api/posts/${id}`, user_id)
     .then(res => {
       console.log("DELETE RES: ", res)
       dispatch({ type: DELETE_SUCCESS});

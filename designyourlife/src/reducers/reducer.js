@@ -133,7 +133,8 @@ export default function reducer (state = defaultState, action) {
             }           
         case UPDATE_SUCCESS:
             return {
-                ...state
+                ...state,
+                posts: action.payload
             }           
         case UPDATE_FAILURE:
                 return {
