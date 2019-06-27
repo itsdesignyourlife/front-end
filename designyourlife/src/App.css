@@ -32,6 +32,132 @@
   }
 }
 
-form {
-  color: red;
+
+/* //####################################################### */
+/* DORA LOGIN CSS */
+
+.loginbox {
+  width: 30rem;
+  margin: 0 auto;
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
+  box-shadow: 1rem 1rem 5rem rgba(30, 49, 78, 0.14);
+  padding: 3rem 2rem;
+  min-height: 16.5rem;
+  text-align: center;
+}
+
+
+.loginHeader {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #1e314e;
+  line-height: 1.2em;
+  margin: 0;
+  letter-spacing: -0.15rem;
+}
+
+.loginbox p {
+  margin-bottom: 6rem;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+}
+
+#form input {
+  margin-bottom: 2rem;
+  height: 3rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+}
+
+.button {
+  border: 0.5px transparent solid;
+  background-color: #a3e4d7;
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+  width: 40%;
+  margin: 0 auto;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #1e314e;
+  text-transform: none;
+  cursor: pointer;  
+  font-weight: 600;
+}
+
+.upperButton {
+  margin-bottom: 2rem;
+}
+
+.button:hover {
+  background: white;
+  color: #1e314e;
+  border: 0.1rem solid #a3e4d7;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+}
+
+
+@media (max-width: 500px){
+  .loginbox{
+    width: 80%;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+  .loginbox p {
+    margin-bottom: 3rem;
+  }
+  .loginHeader {
+    font-size: 2rem;
+  }
+  #form input {
+    height: 2rem;
+  }
+  .button {
+    padding: 1rem 1rem;
+    font-size: 1rem;
+  }
+}
+
+/* ################################################# */
+
+/* User CSS */
+
+.userMainContainer {
+  border: solid red 1px;
+  width: 90vw;
+  margin: auto;
+}
+
+/* ##################################################### */
+
+/* NAV css */
+
+.navMainContainer {
+  border: solid green 1px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* ############################################## */
+
+/* Form CSS */
+
+.formMainContainer {
+  border: solid purple 1px;
+  width: 90%;
+  margin-top: 20px;
+  margin: auto;
 }

@@ -48,6 +48,21 @@ export const CREATELOGENTRY_START = 'CREATELOGENTRY_START';
 export const CREATELOGENTRY_SUCCESS = 'CREATELOGENTRY_SUCCESS';
 export const CREATELOGENTRY_FAILURE = 'CREATELOGENTRY_FAILURE';
 
+export const GETCYCLEDATE_START = 'GETCYCLEDATE_START';
+export const GETCYCLEDATE_SUCCESS = 'GETCYCLEDATE_SUCCESS';
+export const GETCYCLEDATE_FAILURE = 'GETCYCLEDATE_FAILURE';
+
+
+
+export const GETWEEKNUMBER_START = 'GETWEEKNUMBER_START';
+export const GETWEEKNUMBER_SUCCESS = 'GETWEEKNUMBER_SUCCESS';
+export const GETWEEKNUMBER_FAILURE = 'GETWEEKNUMBER_FAILURE';
+
+export const WEEKNUMBERUPDATE_START = 'WEEKNUMBERUPDATE_START';
+export const WEEKNUMBERUPDATE_SUCCESS = 'WEEKNUMBERUPDATE_SUCCESS';
+export const WEEKNUMBERUPDATE_FAILURE = 'WEEKNUMBERUPDATE_FAILURE';
+
+
 export const login = creds => dispatch => {
     dispatch({ type: LOGIN_START });
     return axios
@@ -81,18 +96,18 @@ export const login = creds => dispatch => {
   };
 
   
-  export const getPosts = () => (dispatch) => {
-    dispatch ({type: GET_START})
-    axiosAuth()
-    .get('https://dyl-backend.herokuapp.com/api/posts')
-    .then(res => {
-        console.log("GETPOSTS RES: ", res)
-        dispatch({type: GET_SUCCESS})
-    })
-    .catch(err => {
-        console.log("GETPOSTS ERR: ", err)
-        dispatch({type: GET_FAILURE})
-    })
+export const getPosts = () => (dispatch) => {
+  dispatch ({type: GET_START})
+  axiosAuth()
+  .get('https://dyl-backend.herokuapp.com/api/posts')
+  .then(res => {
+      console.log("GETPOSTS RES: ", res)
+      dispatch({type: GET_SUCCESS})
+  })
+  .catch(err => {
+      console.log("GETPOSTS ERR: ", err)
+      dispatch({type: GET_FAILURE})
+  })
 }
 
 export const getPostsByUserId = (user_id) => (dispatch) => {
@@ -177,11 +192,32 @@ export const deletePost = (id, user_id) => dispatch => {
 };
 
 
-export const updateEndOfWeekCycle = () => dispatch => {
-  console.log("NEW CYCLE: ", moment().add(7, 'days').calendar())
+
+//getEndOfWeekCycle
+
+export const getCycleDate = (id) => (dispatch) => {
+  dispatch ({type: GETCYCLEDATE_START})
+  axiosAuth()
+  .get(`https://dyl-backend.herokuapp.com/api/cycle/${id}`)
+  .then(res => {
+      console.log("GETCYCLEDATE RES: ", res)
+      dispatch({type: GETCYCLEDATE_SUCCESS})
+  })
+  .catch(err => {
+      console.log("GETCYCLEDATE ERR: ", err)
+      dispatch({type: GETCYCLEDATE_FAILURE})
+  })
+}
+
+
+export const updateEndOfWeekCycle = (id) => dispatch => {
+  console.log("NEW CYCLE: ", moment().add(7, 'days').calendar(), "TYPE OF: ", typeof moment().add(7, 'days').calendar())
+  // let newDate = moment().add(7, 'days').calendar()
+  let newDate = "test"
+  console.log("NEWDATEVARIABLE: ", newDate)
   dispatch({ type: NEW_CYCLE_UPDATE_START });
   axiosAuth()
-    .put(`CREATE_AN_ENDPOINT_FOR_ME`, moment().add(7, 'days').calendar())
+    .put(`https://dyl-backend.herokuapp.com/api/cycle/${id}`, newDate)
     .then(res => {
       console.log("NEW CYCLE UPDATE RES: ", res)
       dispatch({ type: NEW_CYCLE_UPDATE_SUCCESS});
@@ -191,6 +227,40 @@ export const updateEndOfWeekCycle = () => dispatch => {
       dispatch({ type: NEW_CYCLE_UPDATE_FAILURE});
     });
 };
+
+//get weekNumber
+
+export const getWeekNumber = () => (dispatch) => {
+  dispatch ({type: GETWEEKNUMBER_START})
+  axiosAuth()
+  .get('https://dyl-backend.herokuapp.com/api/time/1')
+  .then(res => {
+      console.log("GETWEEKNUMBER RES: ", res)
+      dispatch({type: GETWEEKNUMBER_SUCCESS})
+  })
+  .catch(err => {
+      console.log("GETWEEKNUMBER ERR: ", err)
+      dispatch({type: GETWEEKNUMBER_FAILURE})
+  })
+}
+
+
+export const updateWeekNumber = (updatedWeekNumber) => dispatch => {
+  console.log("NEW WEEKNUMBER: ", updatedWeekNumber, "typeOf: ", typeof updatedWeekNumber)
+  dispatch({ type: WEEKNUMBERUPDATE_START });
+  axiosAuth()
+    .put(`https://dyl-backend.herokuapp.com/api/time/1`, 2)
+    .then(res => {
+      console.log("WEEK NUMBER UPDATE RES: ", res)
+      dispatch({ type: WEEKNUMBERUPDATE_SUCCESS});
+    })
+    .catch(err => {
+      console.log("WEEK NUMBER UPDATE ERR: ", err)
+      dispatch({ type: WEEKNUMBERUPDATE_FAILURE});
+    });
+};
+
+
 
 
 export const createLog = () => dispatch => {
@@ -222,3 +292,4 @@ export const createLogEntry = (idToBePosted, currentLogNumber) => dispatch => {
       dispatch({ type: CREATELOGENTRY_FAILURE});
     });
 };
+
