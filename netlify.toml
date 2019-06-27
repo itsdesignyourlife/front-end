@@ -1,0 +1,4 @@
+[build]
+base = "designyourlife/"
+publish = "designyourlife/build/"
+command = "yarn build"
