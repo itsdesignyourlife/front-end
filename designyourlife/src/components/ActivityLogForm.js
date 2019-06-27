@@ -52,10 +52,10 @@ class ActivityLogForm extends Component {
         }
 
         //--------------------------------
-        // if (this.props.weekNumber === 0 || this.isDateLaterThanCDate(this.props.endOfWeekCycle, moment().format('L'))){
-        //     // this.props.createLog()
-        //     //increment weekNumber
-        // }
+        if (this.props.weekNumber === 0 || this.isDateLaterThanCDate(this.props.endOfWeekCycle, moment().format('L'))){
+            let newWeekNumber = this.props.weekNumber + 1
+            this.props.updateWeekNumber()
+        }
         // if (this.props.weekNumber === 0){
         //     return null
         // }else{
@@ -189,6 +189,7 @@ function mapStateToProps(state){
         user_id: state.user_id,
         username: state.username,
         endOfWeekCycle: state.endOfWeekCycle,
+        weekNumber: state.weekNumber
         logs: state.logs,
         latestLog: state.logs[state.logs.length -1]
     }

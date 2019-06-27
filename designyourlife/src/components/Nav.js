@@ -16,9 +16,9 @@ class Nav extends Component {
         return(
             <div className = "nav">
                  
-                <a href = "#" onClick = {this.preventRefresh}>Main Page</a>
-                <a href = "#" onClick = {this.preventRefresh}>Activity Log</a>
-                <a href = "#" onClick = {this.preventRefresh}>Reflection Log</a>
+                <button onClick = {this.preventRefresh}>Main Page</button>
+                <button onClick = {this.preventRefresh}>Activity Log</button>
+                <button onClick = {this.preventRefresh}>Reflection Log</button>
 
                 
             </div>

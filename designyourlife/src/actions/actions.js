@@ -198,7 +198,7 @@ export const deletePost = (id, user_id) => dispatch => {
 export const getCycleDate = () => (dispatch) => {
   dispatch ({type: GETCYCLEDATE_START})
   axiosAuth()
-  .get('https://dyl-backend.herokuapp.com/api/cycle')
+  .get('https://dyl-backend.herokuapp.com/api/cycle/1')
   .then(res => {
       console.log("GETCYCLEDATE RES: ", res)
       dispatch({type: GETCYCLEDATE_SUCCESS})
@@ -211,10 +211,10 @@ export const getCycleDate = () => (dispatch) => {
 
 
 export const updateEndOfWeekCycle = () => dispatch => {
-  console.log("NEW CYCLE: ", moment().add(7, 'days').calendar())
+  console.log("NEW CYCLE: ", moment().add(7, 'days').calendar(), "TYPE OF: ", typeof moment().add(7, 'days').calendar())
   dispatch({ type: NEW_CYCLE_UPDATE_START });
   axiosAuth()
-    .put(`https://dyl-backend.herokuapp.com/api/cycle`, moment().add(7, 'days').calendar())
+    .put(`https://dyl-backend.herokuapp.com/api/cycle/1`, moment().add(7, 'days').calendar())
     .then(res => {
       console.log("NEW CYCLE UPDATE RES: ", res)
       dispatch({ type: NEW_CYCLE_UPDATE_SUCCESS});
@@ -230,7 +230,7 @@ export const updateEndOfWeekCycle = () => dispatch => {
 export const getWeekNumber = () => (dispatch) => {
   dispatch ({type: GETWEEKNUMBER_START})
   axiosAuth()
-  .get('https://dyl-backend.herokuapp.com/api/time')
+  .get('https://dyl-backend.herokuapp.com/api/time/1')
   .then(res => {
       console.log("GETWEEKNUMBER RES: ", res)
       dispatch({type: GETWEEKNUMBER_SUCCESS})
@@ -243,10 +243,10 @@ export const getWeekNumber = () => (dispatch) => {
 
 
 export const updateWeekNumber = (updatedWeekNumber) => dispatch => {
-  console.log("NEW WEEKNUMBER: ", updatedWeekNumber)
+  console.log("NEW WEEKNUMBER: ", updatedWeekNumber, "typeOf: ", typeof updatedWeekNumber)
   dispatch({ type: WEEKNUMBERUPDATE_START });
   axiosAuth()
-    .put(`https://dyl-backend.herokuapp.com/api/time`, 2)
+    .put(`https://dyl-backend.herokuapp.com/api/time/1`, 2)
     .then(res => {
       console.log("WEEK NUMBER UPDATE RES: ", res)
       dispatch({ type: WEEKNUMBERUPDATE_SUCCESS});
