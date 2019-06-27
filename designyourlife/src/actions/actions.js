@@ -212,7 +212,8 @@ export const getCycleDate = (id) => (dispatch) => {
 
 export const updateEndOfWeekCycle = (id) => dispatch => {
   console.log("NEW CYCLE: ", moment().add(7, 'days').calendar(), "TYPE OF: ", typeof moment().add(7, 'days').calendar())
-  let newDate = moment().add(7, 'days').calendar()
+  // let newDate = moment().add(7, 'days').calendar()
+  let newDate = "test"
   console.log("NEWDATEVARIABLE: ", newDate)
   dispatch({ type: NEW_CYCLE_UPDATE_START });
   axiosAuth()
