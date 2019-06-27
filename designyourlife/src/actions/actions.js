@@ -43,7 +43,9 @@ export const login = creds => dispatch => {
       .then(res => {
         console.log("LOGIN_RES: ", res)
         localStorage.setItem('token', res.data.token);
-        dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+        localStorage.setItem('user_id', res.data.user.id);
+        localStorage.setItem('username', res.data.user.username);
+        dispatch({ type: LOGIN_SUCCESS, payload: res.data.user });
       })
       .catch(err => {
         console.log("LOGIN ERR: ", err)
@@ -73,7 +75,7 @@ export const login = creds => dispatch => {
     .get('https://dyl-backend.herokuapp.com/api/posts')
     .then(res => {
         console.log("GETPOSTS RES: ", res)
-        dispatch({type: GET_SUCCESS, payload: res.data})
+        dispatch({type: GET_SUCCESS})
     })
     .catch(err => {
         console.log("GETPOSTS ERR: ", err)
@@ -82,7 +84,7 @@ export const login = creds => dispatch => {
 }
 
 export const getPostsByUserId = (user_id) => (dispatch) => {
-  console.log(user_id)
+  console.log("getPosts user_id:", user_id)
   dispatch ({type: GETUSERPOSTS_START})
   axiosAuth()
   .get(`https://dyl-backend.herokuapp.com/api/home/${user_id}`)
@@ -113,15 +115,16 @@ export const getPostById = (id) => (dispatch) => {
 }
 
 
-
-export const newPost = postObj => dispatch => {
+//add ID to arg
+export const newPost = (postObj, id) => dispatch => {
   console.log("postObj: ", postObj)
+  console.log("post user_id: ", id)
   dispatch({ type: POST_START });
   axiosAuth()
-    .post('https://dyl-backend.herokuapp.com/api/posts', postObj)
+    .post('https://dyl-backend.herokuapp.com/api/posts', postObj, id)
     .then(res => {
       console.log("POST RES: ", res)
-      dispatch({ type: POST_SUCCESS, payload: res.data.post });
+      dispatch({ type: POST_SUCCESS, payload: res.data.posts});
     })
     .catch(err => {
       console.log("POST ERR: ", err)
@@ -147,7 +150,7 @@ export const updatePost = (id, postObj) => dispatch => {
 
 
 export const deletePost = (id) => dispatch => {
-  console.log("id: ", id)
+  console.log("Delete id: ", id)
   dispatch({ type: DELETE_START });
   axiosAuth()
     .delete(`https://dyl-backend.herokuapp.com/api/posts/${id}`)

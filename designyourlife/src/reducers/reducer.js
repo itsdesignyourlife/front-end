@@ -13,36 +13,60 @@ import {
 
 
 let defaultState = {
+    username: "",
+    user_id: "",
     posts: [],
-    post: []
+    post: [],
+    loggingIn: false,
+    loggingInError: "",
+    registering: false,
+    registeringError: "",
+    gettingUserPosts: false,
+    gettingUserPostsError: "",
+
+
+    
+
 }
 
 export default function reducer (state = defaultState, action) {
    switch(action.type){
         case LOGIN_START:
            return {
-               ...state
+               ...state,
+               loggingIn: true
+
            }
         case LOGIN_SUCCESS:
             return {
-                ...state
+                ...state,
+                username: action.payload.username,
+                user_id: action.payload.id,
+                loggingIn: false,
+                loggingInError: ""
             }           
         case LOGIN_FAILURE:
             return {
-                ...state
+                ...state,
+                loggingInError: "Login failed",
+                loggingIn: false
             }   
         //################################
         case REGISTER_START:
             return {
-                ...state
+                ...state,
+                registering: true,
             }           
         case REGISTER_SUCCESS:
             return {
-                ...state
+                ...state,
+                registering: false,
             }           
         case REGISTER_FAILURE:
             return {
-                ...state
+                ...state,
+                registering: false,
+                registeringError: "Register error!"
             }     
         //################################
         case GET_START:
@@ -51,8 +75,7 @@ export default function reducer (state = defaultState, action) {
             }           
         case GET_SUCCESS:
             return {
-                ...state,
-                posts: action.payload
+                ...state
             }           
         case GET_FAILURE:
                 return {
@@ -61,17 +84,20 @@ export default function reducer (state = defaultState, action) {
         //################################
         case GETUSERPOSTS_START:
             return {
-                ...state
+                ...state,
+                gettingUserPosts: true
             }           
         case GETUSERPOSTS_SUCCESS:
             return {
                 ...state,
-                post: action.payload
+                posts: action.payload,
+                gettingUserPosts: false
             }           
         case GETUSERPOSTS_FAILURE:
-                return {
-                    ...state
-                }           
+            return {
+                ...state,
+                gettingUserPosts: false
+            }           
         //################################
         case GET1_START:
             return {
@@ -93,7 +119,8 @@ export default function reducer (state = defaultState, action) {
                 }           
         case POST_SUCCESS:
             return {
-                ...state
+                ...state,
+                posts: action.payload
             }           
         case POST_FAILURE:
                 return {

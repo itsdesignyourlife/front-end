@@ -3,9 +3,10 @@ import {Component} from 'react';
 import {connect} from "react-redux";
 import {getPosts, getPostsByUserId, getPostById, newPost, updatePost, deletePost} from '../actions/actions';
 import moment from 'moment';
-import ActivityLog from './ActivityLog';
+import ActivityLogForm from './ActivityLogForm';
+import ActivityLogPosts from './ActivityLogPosts';
 
-class User extends Component {
+class ActivityLog extends Component {
     state = {
         id: "",
         user_id: "",
@@ -15,11 +16,10 @@ class User extends Component {
         energyScore: ""
     }
 
-    componentDidMount(){
-        console.log("GET USER POSTS TRIGGERED")
-        this.props.getPosts()
-        this.props.getPostsByUserId(localStorage.getItem('user_id'))
-    }
+    // componentDidMount(){
+    //     console.log("GET USER POSTS TRIGGERED")
+    //     this.props.getPostsByUserId(localStorage.getItem('user_id'))
+    // }
 
     getPostsByUserid = e => {
         e.preventDefault()
@@ -130,8 +130,88 @@ class User extends Component {
     render(){
         return(
             <div>
-               <ActivityLog />
-               {/* <ReflectionLog /> */}
+                {/* 
+                //TESTING VVVVVV
+                <h1>ALL POSTS ALREADY LOADED IN CONSOLE</h1>
+                <h1>GET POSTS BY USER ID</h1>
+                <input 
+                    type = "number"
+                    placeholder = "user_id"
+                    name = "user_id"
+                    value = {this.state.user_id}
+                    onChange = {this.changeHandler}
+                />
+                <button onClick = {this.getPostsByUserid} >Search by id</button>
+
+                <h1>Get Individual Post By Post ID</h1>
+                <input
+                    type = "number"
+                    placeholder = "id"
+                    name = "id"
+                    value = {this.state.id}
+                    onChange = {this.changeHandler}
+                />
+                <button onClick = {this.getPostById}>SUBMIT</button>
+
+                <h1>New post</h1>
+                <input
+                    type = "number"
+                    placeholder = "user_id"
+                    name = "user_id"
+                    value = {this.state.user_id}
+                    onChange = {this.changeHandler}
+                 />
+                <input
+                    type = "text"
+                    placeholder = "postTitle"
+                    name = "postTitle"
+                    value = {this.state.postTitle}
+                    onChange = {this.changeHandler}
+                 />
+                 <input
+                    type = "text"
+                    placeholder = "postBody"
+                    name = "postBody"
+                    value = {this.state.postBody}
+                    onChange = {this.changeHandler}
+                 />
+                 <input
+                    type = "number"
+                    placeholder = "engagementScore"
+                    name = "engagementScore"
+                    value = {this.state.engagementScore}
+                    onChange = {this.changeHandler}
+                 />
+                 <input
+                    type = "number"
+                    placeholder = "energyScore"
+                    name = "energyScore"
+                    value = {this.state.energyScore}
+                    onChange = {this.changeHandler}
+                 />
+                 
+                 <button onClick = {this.newPost}>POST!</button>
+                 <button onClick = {this.updatePost}>UPDATE!</button>
+                 <button onClick = {this.deletePost}>DELETE</button>
+                 
+                 <h2>Post ID for update and delete</h2>
+                 <input
+                    type = "number"
+                    placeholder = "postID for update only"
+                    name = "id"
+                    value = {this.state.id}
+                    onChange = {this.changeHandler}
+                 />
+                <button onClick = {this.timeStampTest}>TEST TIMESTAMP</button> */}
+                <ActivityLogForm />
+                <ActivityLogPosts />
+                
+
+                <div className = "posts">
+
+                </div>
+
+                
             </div>
         )
     }
@@ -143,6 +223,6 @@ function mapStateToProps(state){
         user_id: state.user_id,
         username: state.username,
     }
-}
+}     
 
-export default connect(mapStateToProps, {getPosts, getPostsByUserId, newPost, getPostById, updatePost, deletePost})(User);
+export default connect(mapStateToProps, {getPosts, getPostsByUserId, newPost, getPostById, updatePost, deletePost})(ActivityLog);

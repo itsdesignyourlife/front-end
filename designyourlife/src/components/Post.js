@@ -3,9 +3,8 @@ import {Component} from 'react';
 import {connect} from "react-redux";
 import {getPosts, getPostsByUserId, getPostById, newPost, updatePost, deletePost} from '../actions/actions';
 import moment from 'moment';
-import ActivityLog from './ActivityLog';
 
-class User extends Component {
+class Post extends Component {
     state = {
         id: "",
         user_id: "",
@@ -15,28 +14,6 @@ class User extends Component {
         energyScore: ""
     }
 
-    componentDidMount(){
-        console.log("GET USER POSTS TRIGGERED")
-        this.props.getPosts()
-        this.props.getPostsByUserId(localStorage.getItem('user_id'))
-    }
-
-    getPostsByUserid = e => {
-        e.preventDefault()
-        this.props.getPostsByUserId(this.state.user_id)
-        this.setState({
-            user_id: ""
-        })
-    }
-
-    getPostById = e => {
-        e.preventDefault()
-        this.props.getPostById(this.state.id)
-        this.setState({
-            id: ""
-        })
-    }
-
     changeHandler = e => {
         e.preventDefault();
         this.setState({
@@ -44,31 +21,7 @@ class User extends Component {
         })
     }
 
-    newPost = e => {
-        e.preventDefault()
-        let postObj = {
-            //username: needs to be added, pending addition to server DB
-            user_id: parseInt(this.props.user_id, 10),
-            postTitle: this.state.postTitle,
-            postBody: this.state.postBody,
-            engagementScore: parseInt(this.state.engagementScore, 10),
-            energyScore: parseInt(this.state.energyScore, 10),
-            createdAt: moment().format('MMMM Do YYYY, h:mm:ss a')
-        }
-        console.log("POST TRIGGERED")
-        this.props.newPost(postObj)
-        console.log("GET USER POSTS TRIGGERED")
-        this.props.getPostsByUserId(this.props.user_id)
-        this.setState({
-            id: "",
-            user_id: "",
-            postTitle: "",
-            postBody: "",
-            engagementScore: "",
-            energyScore: ""
-        })
-    }
-
+  
     updatePost = e => {
         console.log("UPDATE TRIGGERED")
         e.preventDefault()
@@ -94,8 +47,9 @@ class User extends Component {
     deletePost = e => {
         console.log("DELETE TRIGGERED")
         e.preventDefault()
-        let deleteId = parseInt(this.state.id, 10);
+        let deleteId = parseInt(this.props.post.id, 10);
         this.props.deletePost(deleteId)
+        // this.props.getPostsByUserId(this.props.user_id)
         this.setState({
             id: "",
             user_id: "",
@@ -129,10 +83,25 @@ class User extends Component {
 
     render(){
         return(
-            <div>
-               <ActivityLog />
-               {/* <ReflectionLog /> */}
-            </div>
+            <div className = "post">
+                    <div>
+                        <div>
+                            <h1>POST</h1>
+                            <h4>{this.props.post.postTitle}</h4>
+                            <h5>{this.props.post.engagementScore}</h5>
+                            <h5>{this.props.post.energyScore}</h5>
+                        </div>
+                        <div>
+                            <div>
+                                {this.props.post.postBody}
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button onClick = {this.updatePost}>UPDATE!</button>
+                        <button onClick = {this.deletePost}>DELETE</button>
+                    </div>
+                </div>
         )
     }
 }
@@ -143,6 +112,6 @@ function mapStateToProps(state){
         user_id: state.user_id,
         username: state.username,
     }
-}
+}     
 
-export default connect(mapStateToProps, {getPosts, getPostsByUserId, newPost, getPostById, updatePost, deletePost})(User);
+export default connect(mapStateToProps, {getPosts, getPostsByUserId, newPost, getPostById, updatePost, deletePost})(Post);
