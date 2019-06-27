@@ -33,9 +33,7 @@ let defaultState = {
     //NEED TO BE CREATED
 
     endOfWeekCycle: "",
-    logs: [
-
-    ],
+    weekNumber: ""
 }
 
 export default function reducer (state = defaultState, action) {

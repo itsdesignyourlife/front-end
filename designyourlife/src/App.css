@@ -32,6 +32,7 @@
   }
 }
 
+
 /* //####################################################### */
 /* DORA LOGIN CSS */
 
@@ -130,3 +131,33 @@
 }
 
 /* ################################################# */
+
+/* User CSS */
+
+.userMainContainer {
+  border: solid red 1px;
+  width: 90vw;
+  margin: auto;
+}
+
+/* ##################################################### */
+
+/* NAV css */
+
+.navMainContainer {
+  border: solid green 1px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* ############################################## */
+
+/* Form CSS */
+
+.formMainContainer {
+  border: solid purple 1px;
+  width: 90%;
+  margin-top: 20px;
+  margin: auto;
+}

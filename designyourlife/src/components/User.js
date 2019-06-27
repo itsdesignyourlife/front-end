@@ -5,6 +5,7 @@ import {getPosts, getPostsByUserId, getPostById, newPost, updatePost, deletePost
 import moment from 'moment';
 import ActivityLog from './ActivityLog';
 import Nav from './Nav';
+import ReflectionLog from './ReflectionLog';
 
 class User extends Component {
     state = {
@@ -13,7 +14,9 @@ class User extends Component {
         postTitle: "",
         postBody: "",
         engagementScore: "",
-        energyScore: ""
+        energyScore: "",
+
+        reflectionView: false,
     }
 
     componentDidMount(){
@@ -22,10 +25,18 @@ class User extends Component {
         this.props.getPostsByUserId(localStorage.getItem('user_id'))
     }
 
+    reflectionViewToggle = (bool) => {
+        this.setState({
+            ...this.state,
+            reflectionView: bool
+        })
+    }
+
     getPostsByUserid = e => {
         e.preventDefault()
         this.props.getPostsByUserId(this.state.user_id)
         this.setState({
+            ...this.state,
             user_id: ""
         })
     }
@@ -129,12 +140,16 @@ class User extends Component {
 
 
     render(){
+        console.log("TOGGLE: ", this.state.reflectionView)
+        
         return(
-           
-            <div>
-                <Nav />
-                <ActivityLog />
-               {/* <ReflectionLog /> */}
+            <div className = "userMainContainer">
+                <Nav reflectionViewToggle = {this.reflectionViewToggle} />
+                {this.state.reflectionView ? (
+                    <ReflectionLog />
+                ) : (
+                    <ActivityLog />
+                )}
             </div>
         )
     }

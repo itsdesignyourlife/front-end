@@ -195,10 +195,10 @@ export const deletePost = (id, user_id) => dispatch => {
 
 //getEndOfWeekCycle
 
-export const getCycleDate = () => (dispatch) => {
+export const getCycleDate = (id) => (dispatch) => {
   dispatch ({type: GETCYCLEDATE_START})
   axiosAuth()
-  .get('https://dyl-backend.herokuapp.com/api/cycle/1')
+  .get(`https://dyl-backend.herokuapp.com/api/cycle/${id}`)
   .then(res => {
       console.log("GETCYCLEDATE RES: ", res)
       dispatch({type: GETCYCLEDATE_SUCCESS})
@@ -210,11 +210,13 @@ export const getCycleDate = () => (dispatch) => {
 }
 
 
-export const updateEndOfWeekCycle = () => dispatch => {
+export const updateEndOfWeekCycle = (id) => dispatch => {
   console.log("NEW CYCLE: ", moment().add(7, 'days').calendar(), "TYPE OF: ", typeof moment().add(7, 'days').calendar())
+  let newDate = moment().add(7, 'days').calendar()
+  console.log("NEWDATEVARIABLE: ", newDate)
   dispatch({ type: NEW_CYCLE_UPDATE_START });
   axiosAuth()
-    .put(`https://dyl-backend.herokuapp.com/api/cycle/1`, moment().add(7, 'days').calendar())
+    .put(`https://dyl-backend.herokuapp.com/api/cycle/${id}`, newDate)
     .then(res => {
       console.log("NEW CYCLE UPDATE RES: ", res)
       dispatch({ type: NEW_CYCLE_UPDATE_SUCCESS});

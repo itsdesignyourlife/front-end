@@ -44,11 +44,11 @@ class ActivityLogForm extends Component {
     componentDidUpdate(){
         //reflectionLogPostIds arrays Assignment
         
-        this.props.getCycleDate()
+        this.props.getCycleDate(1)
         
         if (this.props.endOfWeekCycle === ""){
             console.log("UPDATE CYCLE DATE TRIGGER")
-            this.props.updateEndOfWeekCycle()
+            this.props.updateEndOfWeekCycle(1)
         }
 
         //--------------------------------
@@ -133,7 +133,7 @@ class ActivityLogForm extends Component {
 
     render(){
         return(
-            <div>
+            <div className = "formMainContainer">
                 <div className = "activityLogForm">
                     <div className = "inputContainer">
                         <div>
@@ -189,9 +189,8 @@ function mapStateToProps(state){
         user_id: state.user_id,
         username: state.username,
         endOfWeekCycle: state.endOfWeekCycle,
-        weekNumber: state.weekNumber
-        logs: state.logs,
-        latestLog: state.logs[state.logs.length -1]
+        weekNumber: state.weekNumber,
+        
     }
 }     
 
