@@ -67,7 +67,7 @@ class ReflectionLog extends Component {
     render(){
         return(
             <div>
-                
+                <h1>REFLECTION LOG</h1>
             </div>
         )
     }

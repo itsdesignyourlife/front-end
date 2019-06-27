@@ -41,33 +41,59 @@ class Login extends React.Component {
       });
     }
   
-    render() {
-      return (
-        <div>
-          <h1 className = "className" >LOGIN COMPONENT</h1>
-          <form id = "idName" onSubmit={this.login}>
-            <input
-              type="text"
-              name="username"
-              placeholder = "username"
-              value={this.state.credentials.username}
-              onChange={this.handleChange}
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder = "password"
-              value={this.state.credentials.password}
-              onChange={this.handleChange}
-            />
-            <button>Log in</button>
-            <button onClick = {this.register}>Register</button>
-          </form>
-        </div>
-      )
-    }
+  //   render() {
+  //     return (
+  //       <div>
+  //         <h1 className = "className" >LOGIN COMPONENT</h1>
+  //         <form id = "idName" onSubmit={this.login}>
+  //           <input
+  //             type="text"
+  //             name="username"
+  //             placeholder = "username"
+  //             value={this.state.credentials.username}
+  //             onChange={this.handleChange}
+  //           />
+  //           <input
+  //             type="password"
+  //             name="password"
+  //             placeholder = "password"
+  //             value={this.state.credentials.password}
+  //             onChange={this.handleChange}
+  //           />
+  //           <button>Log in</button>
+  //           <button onClick = {this.register}>Register</button>
+  //         </form>
+  //       </div>
+  //     )
+  //   }
+  // }
+  render() {
+    return (
+      <div className="loginbox">
+        <h1 className="loginHeader" >Good Time Journal</h1>
+        <p>Sign Up / Register and Start your Journey Here!</p>
+        <form id = "form" onSubmit={this.login}>
+          <input
+            type="text"
+            name="username"
+            placeholder = "username"
+            value={this.state.credentials.username}
+            onChange={this.handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder = "password"
+            value={this.state.credentials.password}
+            onChange={this.handleChange}
+          />
+          <button className="button upperButton">Log in</button>
+          <button className="button" onClick = {this.register}>Register</button>
+        </form>
+      </div>
+    )
   }
-  
+}
   function mapStateToProps(state){
     return {}
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
 import {connect} from "react-redux";
-import {getPosts, getPostsByUserId, getPostById, newPost, updatePost, deletePost, updateEndOfWeekCycle, createLog, createLogEntry} from '../actions/actions';
+import {getPosts, getPostsByUserId, getPostById, newPost, updatePost, deletePost,  createLog, createLogEntry, getCycleDate, updateEndOfWeekCycle, getWeekNumber, updateWeekNumber} from '../actions/actions';
 import moment from 'moment';
 
 class ActivityLogForm extends Component {
@@ -43,24 +43,28 @@ class ActivityLogForm extends Component {
 
     componentDidUpdate(){
         //reflectionLogPostIds arrays Assignment
-
-        //GET endOfWeekCycle from server and set to state
-        console.log("UPDATE CYCLE DATE TRIGGER")
+        
+        this.props.getCycleDate()
+        
         if (this.props.endOfWeekCycle === ""){
-            this.props.updateEndOfWeekCycle();
+            console.log("UPDATE CYCLE DATE TRIGGER")
+            this.props.updateEndOfWeekCycle()
         }
-        if (this.props.logs.length === 0 || this.isDateLaterThanCDate(this.props.endOfWeekCycle, moment().format('L'))){
-            this.props.createLog()
-        }
-        if (this.props.logs.length === 0){
-            return null
-        }else{
-            if (this.props.latestLog[this.props.latestLog.length -1] !== this.props.posts[this.props.posts.length -1].id){
-                let idToBePosted = this.props.posts[this.props.posts.length -1].id
-                let currentLogNumber = this.props.logs.length
-                this.props.createLogEntry(idToBePosted, currentLogNumber)
-            }
-        }
+
+        //--------------------------------
+        // if (this.props.weekNumber === 0 || this.isDateLaterThanCDate(this.props.endOfWeekCycle, moment().format('L'))){
+        //     // this.props.createLog()
+        //     //increment weekNumber
+        // }
+        // if (this.props.weekNumber === 0){
+        //     return null
+        // }else{
+        //     if (this.props.latestLog[this.props.latestLog.length -1] !== this.props.posts[this.props.posts.length -1].id){
+        //         let idToBePosted = this.props.posts[this.props.posts.length -1].id
+        //         let currentLogNumber = this.props.logs.length
+        //         this.props.createLogEntry(idToBePosted, currentLogNumber)
+        //     }
+        // }
     }
 
     changeHandler = e => {
@@ -81,7 +85,6 @@ class ActivityLogForm extends Component {
 
     newPost = e => {
         e.preventDefault()
-        //POSTOBJECT
         let postObj = {
             username: localStorage.getItem('username'),
             user_id: parseInt(this.props.user_id, 10),
@@ -89,7 +92,10 @@ class ActivityLogForm extends Component {
             postBody: this.state.postBody,
             engagementScore: parseInt(this.state.engagementScore, 10),
             energyScore: parseInt(this.state.energyScore, 10),
-            createdAt: moment().format('MMMM Do YYYY, h:mm:ss a')
+            // createdAt: moment().format('MMMM Do YYYY, h:mm:ss a')
+            postTime:moment().format('LT'),
+            postDate: moment().format('L'),
+            weekNumber: 0
         }
         console.log("POST TRIGGERED")
         this.props.newPost(postObj, parseInt(this.props.user_id, 10),)
@@ -101,10 +107,6 @@ class ActivityLogForm extends Component {
             engagementScore: "",
             energyScore: ""
         })
-    
-        
-
-
     }
 
 
@@ -192,4 +194,4 @@ function mapStateToProps(state){
     }
 }     
 
-export default connect(mapStateToProps, {getPosts, getPostsByUserId, newPost, getPostById, updatePost, deletePost, updateEndOfWeekCycle, createLog, createLogEntry})(ActivityLogForm);
+export default connect(mapStateToProps, {getPosts, getPostsByUserId, newPost, getPostById, updatePost, deletePost, createLog, createLogEntry, getCycleDate,  updateEndOfWeekCycle, getWeekNumber, updateWeekNumber})(ActivityLogForm);

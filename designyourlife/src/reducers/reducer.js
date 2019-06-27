@@ -9,9 +9,12 @@ import {
     DELETE_START, DELETE_SUCCESS, DELETE_FAILURE, 
     NEW_CYCLE_UPDATE_START, NEW_CYCLE_UPDATE_SUCCESS, NEW_CYCLE_UPDATE_FAILURE,
     CREATELOG_START, CREATELOG_SUCCESS, CREATELOG_FAILURE,
-    CREATELOGENTRY_START, CREATELOGENTRY_SUCCESS, CREATELOGENTRY_FAILURE,} from '../actions/actions';
+    CREATELOGENTRY_START, CREATELOGENTRY_SUCCESS, CREATELOGENTRY_FAILURE,
+    GETCYCLEDATE_START, GETCYCLEDATE_SUCCESS, GETCYCLEDATE_FAILURE,
+    GETWEEKNUMBER_START, GETWEEKNUMBER_SUCCESS, GETWEEKNUMBER_FAILURE,
+    WEEKNUMBERUPDATE_START, WEEKNUMBERUPDATE_SUCCESS, WEEKNUMBERUPDATE_FAILURE,} from '../actions/actions';
 
-   
+    
     
 
 
@@ -205,7 +208,56 @@ export default function reducer (state = defaultState, action) {
             return {
                 ...state
             }
+        //#######################################
 
+        case GETCYCLEDATE_START:
+            return {
+                ...state
+            }           
+        case GETCYCLEDATE_SUCCESS:
+            return {
+                ...state,
+                // endOfWeekCycle: action.payload //<---------------------------action.payload
+            }           
+        case GETCYCLEDATE_FAILURE:
+            return {
+                ...state
+            }
+        //#######################################
+
+        case GETWEEKNUMBER_START:
+            return {
+                ...state
+            }           
+        case GETWEEKNUMBER_SUCCESS:
+            return {
+                ...state,
+                // endOfWeekCycle: action.payload //<---------------------------action.payload
+            }           
+        case GETWEEKNUMBER_FAILURE:
+            return {
+                ...state
+            }
+
+        //#############################################
+
+        case WEEKNUMBERUPDATE_START:
+            return {
+                ...state
+            }           
+        case WEEKNUMBERUPDATE_SUCCESS:
+            return {
+                ...state,
+                // endOfWeekCycle: action.payload //<---------------------------action.payload
+            }           
+        case WEEKNUMBERUPDATE_FAILURE:
+            return {
+                ...state
+            }
+    
+            
+
+            
     
         default:
             return state;

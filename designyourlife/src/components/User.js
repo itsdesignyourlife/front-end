@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {getPosts, getPostsByUserId, getPostById, newPost, updatePost, deletePost} from '../actions/actions';
 import moment from 'moment';
 import ActivityLog from './ActivityLog';
+import Nav from './Nav';
 
 class User extends Component {
     state = {
@@ -129,8 +130,10 @@ class User extends Component {
 
     render(){
         return(
+           
             <div>
-               <ActivityLog />
+                <Nav />
+                <ActivityLog />
                {/* <ReflectionLog /> */}
             </div>
         )
