@@ -1,6 +1,5 @@
 import axios from 'axios';
-import axiosAuth from '../utils/axiosAuth'
-import moment from 'moment';
+import axiosAuth from '../utils/axiosAuth';
 
 
 export const LOGIN_START = 'LOGIN_START';
@@ -100,7 +99,6 @@ export const getPosts = () => (dispatch) => {
 }
 
 export const getPostsByUserId = (user_id) => (dispatch) => {
-  console.log("getPostsByUserId user_id:", user_id)
   dispatch ({type: GETUSERPOSTS_START})
   axiosAuth()
   .get(`https://dyl-backend.herokuapp.com/api/home/${user_id}`)
@@ -116,7 +114,6 @@ export const getPostsByUserId = (user_id) => (dispatch) => {
 
 
 export const getPostById = (id) => (dispatch) => {
-  console.log(id)
   dispatch ({type: GET1_START})
   axiosAuth()
   .get(`https://dyl-backend.herokuapp.com/api/posts/${id}`)
@@ -133,8 +130,6 @@ export const getPostById = (id) => (dispatch) => {
 
 //add ID to arg
 export const newPost = (postObj, id) => dispatch => {
-  console.log("postObj: ", postObj)
-  console.log("post user_id: ", id)
   dispatch({ type: POST_START });
   axiosAuth()
     .post('https://dyl-backend.herokuapp.com/api/posts', postObj)
@@ -150,7 +145,6 @@ export const newPost = (postObj, id) => dispatch => {
 
 
 export const updatePost = (id, postObj) => dispatch => {
-  console.log("id: ", id)
   dispatch({ type: UPDATE_START });
   axiosAuth()
     .put(`https://dyl-backend.herokuapp.com/api/posts/${id}`, postObj)
@@ -166,7 +160,6 @@ export const updatePost = (id, postObj) => dispatch => {
 
 
 export const deletePost = (id, user_id) => dispatch => {
-  console.log("Delete id: ", id, "User_id: ", user_id)
   dispatch({ type: DELETE_START });
   axiosAuth()
     .delete(`https://dyl-backend.herokuapp.com/api/posts/${id}`, user_id)
@@ -185,7 +178,6 @@ export const deletePost = (id, user_id) => dispatch => {
 
 
 export const newRefPost = (postObj) => dispatch => {
-  console.log("postObj: ", postObj)
   dispatch({ type: REFPOST_START });
   axiosAuth()
     .post('https://dyl-backend.herokuapp.com/api/reflections', postObj)
@@ -200,7 +192,6 @@ export const newRefPost = (postObj) => dispatch => {
 };
 
 export const updateRefPost = (id, postObj) => dispatch => {
-  console.log("id: ", id)
   dispatch({ type: UPDATEREF_START });
   axiosAuth()
     .put(`https://dyl-backend.herokuapp.com/api/reflections/${id}`, postObj)
@@ -216,7 +207,6 @@ export const updateRefPost = (id, postObj) => dispatch => {
 
 
 export const getReflectionsById = (id) => (dispatch) => {
-  console.log(id)
   dispatch ({type: GETUSERREFS_START})
   axiosAuth()
   .get(`https://dyl-backend.herokuapp.com/api/weekly/${id}`)
@@ -231,7 +221,6 @@ export const getReflectionsById = (id) => (dispatch) => {
 }
 
 export const deleteRef = (id, user_id) => dispatch => {
-  console.log("Delete id: ", id, "User_id: ", user_id)
   dispatch({ type: DELETEREF_START });
   axiosAuth()
     .delete(`https://dyl-backend.herokuapp.com/api/reflections/${id}`)

@@ -532,3 +532,12 @@ export const WEEKNUMBERUPDATE_FAILURE = 'WEEKNUMBERUPDATE_FAILURE';
           return false
         }
     }
+
+
+    
+
+    timeStampTest(){
+        console.log(moment().subtract(7, 'days').calendar()) // mm/dd/yyyy past
+        console.log(moment().format('L')) // mm/dd/yyyy current
+        console.log(moment().add(7, 'days').calendar()) // mm/dd/yyyy future 
+    }

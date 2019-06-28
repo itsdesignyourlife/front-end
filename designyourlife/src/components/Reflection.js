@@ -1,7 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
 import {connect} from "react-redux";
-import {getPosts, getPostsByUserId, getPostById, newPost, updatePost, deleteRef, updateRefPost, getReflectionsById} from '../actions/actions';
+import {deleteRef, updateRefPost, getReflectionsById} from '../actions/actions';
 import moment from 'moment';
 
 class Reflection extends Component {
@@ -13,8 +13,6 @@ class Reflection extends Component {
         updateView: false,
     }
 
-    
-
     changeHandler = e => {
         e.preventDefault();
         this.setState({
@@ -22,7 +20,6 @@ class Reflection extends Component {
         })
     }
 
-  
     updatePost = e => {
         console.log("UPDATE REF TRIGGERED")
         e.preventDefault()
@@ -49,7 +46,6 @@ class Reflection extends Component {
         e.preventDefault()
         let deleteId = parseInt(this.props.reflection.id, 10); //props passed from ActivityLog
         this.props.deleteRef(deleteId, this.props.user_id)
-        // this.props.getPostsByUserId(this.props.user_id)
         this.setState({
             id: "",
             user_id: "",
@@ -59,7 +55,6 @@ class Reflection extends Component {
             energyScore: ""
         })
         setTimeout(() => {this.props.getReflectionsById(this.props.user_id)}, 250);
-        
     }
 
     updateViewToggle = e => {
@@ -71,14 +66,7 @@ class Reflection extends Component {
         console.log("TOGGLED!")
         console.log(this.state.updateView)
     }
-
-    
-
-
    
-    // DORA VVVV
-
-
     render(){
         return (
         <div className="post inputContainer">
@@ -109,10 +97,11 @@ class Reflection extends Component {
                     <div className="inputContainer">
                         <h2>{this.props.reflection.postTitle}</h2>
                         <div>Next week I will... {this.props.reflection.postBody}</div>
+                        <div>{moment().format('L')}</div>
                     </div>
                 )}  
             </div>
-            <div className="buttonDiv">
+            <div className="buttons">
                 <button className="button" onClick={this.deletePost}>DELETE</button>
                 <button className="button" onClick={this.updateViewToggle}> {this.state.updateView ? "Cancel" : "Update"} </button>
             </div>
@@ -120,30 +109,6 @@ class Reflection extends Component {
         );
     }
 }
-
-
-{/* <div className="inputContainer">
-                <div className="form">
-                    <input
-                    type="text"
-                    placeholder="Title"
-                    name="postTitle"
-                    value={this.state.postTitle}
-                    onChange={this.changeHandler}
-                    />
-                </div>
-                <div className="form">
-                    <input
-                    type="text"
-                    placeholder="Post"
-                    name="postBody"
-                    value={this.state.postBody}
-                    onChange={this.changeHandler}
-                    />
-                </div>
-            </div> */}
-
-
 
 function mapStateToProps(state){
     return {
@@ -153,4 +118,4 @@ function mapStateToProps(state){
     }
 }     
 
-export default connect(mapStateToProps, {getPosts, getPostsByUserId, newPost, getPostById, updatePost, deleteRef, updateRefPost, getReflectionsById})(Reflection);
+export default connect(mapStateToProps, {deleteRef, updateRefPost, getReflectionsById})(Reflection);

@@ -16,8 +16,6 @@ class Post extends Component {
 
     }
 
-    
-
     changeHandler = e => {
         e.preventDefault();
         this.setState({
@@ -76,22 +74,7 @@ class Post extends Component {
             energyScore: ""
         })
         setTimeout(() => {this.props.getPostsByUserId(localStorage.getItem('user_id'))}, 250);
-        
     }
-
-    
-      
-    timeStampTest(){
-        console.log(moment().subtract(7, 'days').calendar()) // mm/dd/yyyy past
-        console.log(moment().format('L')) // mm/dd/yyyy current
-        console.log(moment().add(7, 'days').calendar()) // mm/dd/yyyy future 
-    }
-
-
- 
-
-    // DORA VVVV
-
 
     render(){
         return (
@@ -138,13 +121,9 @@ class Post extends Component {
                         <h5>Engagement score: {this.props.post.engagementScore}</h5>
                         <h5>Energy score: {this.props.post.energyScore}</h5>
                         <div>{this.props.post.postBody}</div>
+                        <div>{moment().format('L')}</div>
                     </div>
-                )}
-                
-                
-                
-                
-                
+                )}  
             </div>
             <div className="buttons">
                 <button className="button" onClick={this.deletePost}>Delete</button>
@@ -154,43 +133,6 @@ class Post extends Component {
         );
     }
 }
-
-//UPDATE FORM
-{/* <div className="inputContainer">
-                <div className="form">
-                    <input
-                    type="text"
-                    placeholder="Title"
-                    name="postTitle"
-                    value={this.state.postTitle}
-                    onChange={this.changeHandler}
-                    />
-                    <input
-                    type="number"
-                    placeholder="Engagement Score"
-                    name="engagementScore"
-                    value={this.state.engagementScore}
-                    onChange={this.changeHandler}
-                    />
-                    <input
-                    type="number"
-                    placeholder="Energy Score"
-                    name="energyScore"
-                    value={this.state.energyScore}
-                    onChange={this.changeHandler}
-                    />
-                </div>
-                <div className="form">
-                    <input
-                    type="text"
-                    placeholder="Post"
-                    name="postBody"
-                    value={this.state.postBody}
-                    onChange={this.changeHandler}
-                    />
-                </div>
-            </div> */}
-
 
 
 function mapStateToProps(state){

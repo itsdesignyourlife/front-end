@@ -5,10 +5,9 @@ import {connect} from "react-redux";
 
 
 class Nav extends Component {
-    
-
-    preventRefresh = e => {
+    landingPage = e => {
         e.preventDefault()
+        localStorage.clear();
         window.location.href = 'https://designyourlifejournal.netlify.com/';
     }
 
@@ -34,7 +33,7 @@ class Nav extends Component {
           <div className="nav">
                 <h2 className="loginHeader">Good Time Journal</h2>
                 <div className="navigation-bar">
-                    <button className="button" onClick = {this.preventRefresh}>
+                    <button className="button" onClick = {this.landingPage}>
                     Main Page
                     </button>
                     <button className="button" onClick={this.activityLogSwitch}>

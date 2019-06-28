@@ -11,12 +11,10 @@ class Login extends React.Component {
     }
   
     login = e => {
-      console.log("LOGIN TRIGGERED")
       e.preventDefault();
       // localStorage.setItem("token", "abc")
       this.props.login(this.state.credentials)
         .then(() => {
-          // only fires if login call is successful
           this.props.history.push('/');
         })
         .catch((err) => {

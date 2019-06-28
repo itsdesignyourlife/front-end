@@ -2,7 +2,6 @@ import React from 'react';
 import {Component} from 'react';
 import {connect} from "react-redux";
 import {getPosts, getPostsByUserId, getPostById, newPost, updatePost, deletePost, getReflectionsById} from '../actions/actions';
-import moment from 'moment';
 import ReflectionLogForm from './ReflectionLogForm';
 import ReflectionLogPosts from './ReflectionLogPosts';
 
@@ -17,7 +16,7 @@ class ReflectionLog extends Component {
     }
 
     componentDidMount(){
-        console.log("CDM GET")
+        console.log("CDM GET", this.props.user_id)
         this.props.getReflectionsById(this.props.user_id)
     }
 
@@ -29,16 +28,8 @@ class ReflectionLog extends Component {
     render(){
         return(
             <div className = "ReflectionLog">
-
                 <ReflectionLogForm />
                 <ReflectionLogPosts />
-                
-
-                <div className = "posts">
-
-                </div>
-
-                
             </div>
         )
     }

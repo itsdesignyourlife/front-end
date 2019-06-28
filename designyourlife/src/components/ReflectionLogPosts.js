@@ -1,8 +1,6 @@
 import React from 'react';
 import {Component} from 'react';
 import {connect} from "react-redux";
-import {getPosts, getPostsByUserId, getPostById, newPost, updatePost, deletePost} from '../actions/actions';
-import moment from 'moment';
 import Reflection from './Reflection';
 
 class ReflectionLogPosts extends Component {
@@ -16,25 +14,7 @@ class ReflectionLogPosts extends Component {
     }
 
 
-  
-    
-
-    changeHandler = e => {
-        e.preventDefault();
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
-
-  
-
-   
-      
-     
-
-
     render(){
-        console.log("user_id: ", this.props.user_id)
         return(
             <div>
                 <div className = "reflections">
@@ -53,10 +33,8 @@ class ReflectionLogPosts extends Component {
 
 function mapStateToProps(state){
     return {
-        reflections: state.reflections,
-        user_id: state.user_id,
-        username: state.username,
+        reflections: state.reflections
     }
 }     
 
-export default connect(mapStateToProps, {getPosts, getPostsByUserId, newPost, getPostById, updatePost, deletePost})(ReflectionLogPosts);
+export default connect(mapStateToProps, {})(ReflectionLogPosts);

@@ -13,20 +13,12 @@ class ReflectionLogForm extends Component {
         engagementScore: "",
         energyScore: ""
     }
-
-
+    
     changeHandler = e => {
         e.preventDefault();
         this.setState({
             [e.target.name]: e.target.value
         })
-    }
-
-   
-    timeStampTest(){
-        console.log(moment().subtract(7, 'days').calendar()) // mm/dd/yyyy past
-        console.log(moment().format('L')) // mm/dd/yyyy current
-        console.log(moment().add(7, 'days').calendar()) // mm/dd/yyyy future 
     }
 
 
