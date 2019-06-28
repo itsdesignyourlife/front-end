@@ -1,9 +1,10 @@
 import React from 'react';
 import {Component} from 'react';
 import {connect} from "react-redux";
-import {getPosts, getPostsByUserId, getPostById, newPost, updatePost, deletePost} from '../actions/actions';
+import {getPosts, getPostsByUserId, getPostById, newPost, updatePost, deletePost, getReflectionsById} from '../actions/actions';
 import moment from 'moment';
-
+import ReflectionLogForm from './ReflectionLogForm';
+import ReflectionLogPosts from './ReflectionLogPosts';
 
 class ReflectionLog extends Component {
     state = {
@@ -15,59 +16,29 @@ class ReflectionLog extends Component {
         energyScore: ""
     }
 
-    timeStampCreator(){
-        let date = new Date()
-      
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-        let year = date.getFullYear();
-        let hour = (date.getHours() > 12)?(date.getHours() - 12):(date.getHour);
-        let minutes = date.getMinutes();
-        let ampm =  (date.getHours() > 12)?("pm"):("am")
-      
-        let timeStamp = `${month}/${day}/${year} at ${hour}:${minutes}${ampm}`
-      
-        return timeStamp
-      }
-      
-    timeStampTest(){
-        console.log(moment().subtract(7, 'days').calendar()) //mm/dd/yyyy past
-        console.log(moment().format('L')) //mm/dd/yyyy current
-        console.log(moment().add(7, 'days').calendar()) // mm/dd/yyyy in 1 week
+    componentDidMount(){
+        console.log("CDM GET")
+        this.props.getReflectionsById(this.props.user_id)
     }
 
-    isDateLaterThanCDate(date, cDate) {
-        //input date format: dd/mm/yyyy
-        let dateSplit = date.split("/");
-        //=====================
-        let mm = dateSplit[0];
-        let dd = dateSplit[1];
-        let yyyy = dateSplit[2];
-        //====================
-        let cDateSplit = cDate.split("/");
-        //=====================
-        let cmm = cDateSplit[0];
-        let cdd = cDateSplit[1];
-        let cyyyy = cDateSplit[2];
-        //======================
-        if(yyyy > cyyyy){
-          return true
-        } else if (yyyy === cyyyy && mm > cmm){
-          return true
-        } else if (yyyy === cyyyy && mm === cmm && dd > cdd) {
-          return true
-        } else {
-          return false
-        }
+    componentDidUpdate(){
+        console.log("CDU GET")
+        this.props.getReflectionsById(this.props.user_id)
     }
-
-    
-
 
     render(){
         return(
-            <div>
-                <h1>REFLECTION LOG</h1>
+            <div className = "ReflectionLog">
+
+                <ReflectionLogForm />
+                <ReflectionLogPosts />
+                
+
+                <div className = "posts">
+
+                </div>
+
+                
             </div>
         )
     }
@@ -81,4 +52,4 @@ function mapStateToProps(state){
     }
 }     
 
-export default connect(mapStateToProps, {getPosts, getPostsByUserId, newPost, getPostById, updatePost, deletePost})(ReflectionLog);
+export default connect(mapStateToProps, {getPosts, getPostsByUserId, newPost, getPostById, updatePost, deletePost, getReflectionsById})(ReflectionLog);

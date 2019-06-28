@@ -324,10 +324,34 @@ h5 {
   margin: 3rem auto;
 }
 
-.buttonDiv {
+.buttons {
   max-width: 60rem;
   display: flex;
   justify-content: center;
 }
 /* #############################################3*/
 
+/* VLAD REFLECTIONS */
+
+.reflections {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+/* #############################################*/
+
+/* VLAD POSTS */
+
+.posts {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+/* #############################################*/
+
+/* VLAD POST */
+
+.postBody {
+  background-color: white;
+  height: 200px;
+}

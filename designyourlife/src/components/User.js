@@ -25,6 +25,8 @@ class User extends Component {
         this.props.getPostsByUserId(localStorage.getItem('user_id'))
     }
 
+    
+
     reflectionViewToggle = (bool) => {
         this.setState({
             ...this.state,

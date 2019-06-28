@@ -9,6 +9,7 @@ class Nav extends Component {
 
     preventRefresh = e => {
         e.preventDefault()
+        window.location.href = 'https://designyourlifejournal.netlify.com/';
     }
 
     activityLogSwitch = e => {
@@ -21,22 +22,13 @@ class Nav extends Component {
         this.props.reflectionViewToggle(true)
     }
 
+    logOut = e => {
+        e.preventDefault()
+        localStorage.clear();
+        window.location.reload();
+    }
+
     
-
-
-    // render(){
-    //     console.log("NAV PROPS: ", this.props)
-    //     return(
-    //         <div className = "navMainContainer">
-                 
-    //             <button onClick = {this.preventRefresh}>Main Page</button>
-    //             <button onClick = {this.activityLogSwitch}>Activity Log</button>
-    //             <button onClick = {this.reflectionLogSwitch}>Reflection Log</button>
-
-                
-    //         </div>
-    //     )
-    // }
     render(){
         return (
           <div className="nav">
@@ -46,11 +38,12 @@ class Nav extends Component {
                     Main Page
                     </button>
                     <button className="button" onClick={this.activityLogSwitch}>
-                    Activity Log
+                    Daily Activity Log
                     </button>
                     <button className="button" onClick={this.reflectionLogSwitch}>
-                    Reflection Log
+                    Weekly Reflection Log
                     </button>
+                    <button className = "button" onClick = {this.logOut}>Logout</button>
                 </div>
           </div>
         );

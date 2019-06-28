@@ -11,8 +11,12 @@ class Post extends Component {
         postTitle: "",
         postBody: "",
         engagementScore: "",
-        energyScore: ""
+        energyScore: "",
+        updateView: false,
+
     }
+
+    
 
     changeHandler = e => {
         e.preventDefault();
@@ -48,6 +52,15 @@ class Post extends Component {
         })
     }
 
+    updateViewToggle = e => {
+        e.preventDefault()
+        this.setState({
+            ...this.state,
+            updateView: !this.state.updateView
+        })
+        console.log(this.state.updateView)
+    }
+
     deletePost = e => {
         console.log("DELETE TRIGGERED")
         e.preventDefault()
@@ -62,20 +75,11 @@ class Post extends Component {
             engagementScore: "",
             energyScore: ""
         })
+        setTimeout(() => {this.props.getPostsByUserId(localStorage.getItem('user_id'))}, 250);
+        
     }
 
-    timeStampCreator(){
-        let date = new Date()
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-        let year = date.getFullYear();
-        let hour = (date.getHours() > 12)?(date.getHours() - 12):(date.getHour);
-        let minutes = date.getMinutes();
-        let ampm =  (date.getHours() > 12)?("pm"):("am")
-        let timeStamp = `${month}/${day}/${year} at ${hour}:${minutes}${ampm}`
-        console.log("timeStap: ",timeStamp)
-        return timeStamp
-      }
+    
       
     timeStampTest(){
         console.log(moment().subtract(7, 'days').calendar()) // mm/dd/yyyy past
@@ -84,140 +88,108 @@ class Post extends Component {
     }
 
 
-    // render(){
-        
-
-    //     return(
-    //         <div className = "post">
-    //             <div>
-    //                 <div>
-    //                     <h1>POST</h1>
-    //                     <h4>POST TITLE: {this.props.post.postTitle}</h4>
-    //                     <h5>ENGAGEMENT: {this.props.post.engagementScore}</h5>
-    //                     <h5>ENERGY: {this.props.post.energyScore}</h5>
-    //                     <h5>USER_ID: {this.props.post.user_id}</h5>
-    //                     <h5>ID: {this.props.post.id}</h5>
-    //                     <h5>TIMESTAMP: {moment().format('L')}</h5>
-    //                 </div>
-    //                 <div>
-    //                     <div>
-    //                         {this.props.post.postBody}
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //             <div>
-    //                 <button onClick = {this.deletePost}>DELETE</button>
-    //             </div>
-    //             <div className = "inputContainer">
-    //             <div>
-    //                 <input
-    //                     type = "text"
-    //                     placeholder = "postTitle"
-    //                     name = "postTitle"
-    //                     value = {this.state.postTitle}
-    //                     onChange = {this.changeHandler}
-    //                 />
-    //                 <input
-    //                     type = "number"
-    //                     placeholder = "engagementScore"
-    //                     name = "engagementScore"
-    //                     value = {this.state.engagementScore}
-    //                     onChange = {this.changeHandler}
-    //                 />
-    //                 <input
-    //                     type = "number"
-    //                     placeholder = "energyScore"
-    //                     name = "energyScore"
-    //                     value = {this.state.energyScore}
-    //                     onChange = {this.changeHandler}
-    //                 />
-    //             </div>
-    //             <div>
-    //                 <input
-    //                     type = "text"
-    //                     placeholder = "postBody"
-    //                     name = "postBody"
-    //                     value = {this.state.postBody}
-    //                     onChange = {this.changeHandler}
-    //                 />
-    //             </div>
-    //             <button onClick = {this.updatePost}>UPDATE!</button>
-    //             </div>
-    //         </div>
-    //     )
-    // }
+ 
 
     // DORA VVVV
 
 
     render(){
-            
-
         return (
         <div className="post inputContainer">
-            <div>
-            <div className="inputContainer">
-                <h1 className="loginHeader">POST</h1>
-                <h4>POST TITLE: {this.props.post.postTitle}</h4>
-                <h5>ENGAGEMENT: {this.props.post.engagementScore}</h5>
-                <h5>ENERGY: {this.props.post.energyScore}</h5>
-                <h5>USER_ID: {this.props.post.user_id}</h5>
-                <h5>ID: {this.props.post.id}</h5>
-                <h5>TIMESTAMP: {moment().format("L")}</h5>
-            </div>
-            <div>
-                <div>{this.props.post.postBody}</div>
-            </div>
-            </div>
-            <div className="buttonDiv">
-            <button className="button" onClick={this.deletePost}>
-                DELETE
-            </button>
-            </div>
-            <div className="inputContainer">
-            <div className="form">
-                <input
-                type="text"
-                placeholder="Title"
-                name="postTitle"
-                value={this.state.postTitle}
-                onChange={this.changeHandler}
-                />
-                <input
-                type="number"
-                placeholder="Engagement Score"
-                name="engagementScore"
-                value={this.state.engagementScore}
-                onChange={this.changeHandler}
-                />
-                <input
-                type="number"
-                placeholder="Energy Score"
-                name="energyScore"
-                value={this.state.energyScore}
-                onChange={this.changeHandler}
-                />
-            </div>
-            <div className="form">
-                <input
-                type="text"
-                placeholder="Post"
-                name="postBody"
-                value={this.state.postBody}
-                onChange={this.changeHandler}
-                />
-            </div>
-                </div>
-                <div className="buttonDiv">
-            <button className="button" onClick={this.updatePost}>
-            UPDATE!
-            </button>
+            <div className = "postContent">
+                
+                {this.state.updateView ? (
+                    <div className="inputContainer">
+                    <div className="form">
+                        <input
+                            type="text"
+                            placeholder="What did you do?"
+                            name="postTitle"
+                            value={this.state.postTitle}
+                            onChange={this.changeHandler}
+                        />
+                        <input
+                            type="number"
+                            placeholder="How engaged were you in the activity?"
+                            name="engagementScore"
+                            value={this.state.engagementScore}
+                            onChange={this.changeHandler}
+                        />
+                        <input
+                            type="number"
+                            placeholder="How energized did you feel?"
+                            name="energyScore"
+                            value={this.state.energyScore}
+                            onChange={this.changeHandler}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Comments"
+                            name="postBody"
+                            value={this.state.postBody}
+                            onChange={this.changeHandler}
+                        />
+                        <button className = "button" onClick = {this.updatePost}>Submit update</button>
                     </div>
+                </div>
+                ) : (
+                    <div className="inputContainer ">
+                        <h3>{this.props.post.postTitle}</h3>
+                        <h5>Engagement score: {this.props.post.engagementScore}</h5>
+                        <h5>Energy score: {this.props.post.energyScore}</h5>
+                        <div>{this.props.post.postBody}</div>
+                    </div>
+                )}
+                
+                
+                
+                
+                
+            </div>
+            <div className="buttons">
+                <button className="button" onClick={this.deletePost}>Delete</button>
+                <button className="button" onClick={this.updateViewToggle}>{this.state.updateView ? "Cancel" : "Update"}</button>
+            </div>
         </div>
         );
     }
 }
 
+//UPDATE FORM
+{/* <div className="inputContainer">
+                <div className="form">
+                    <input
+                    type="text"
+                    placeholder="Title"
+                    name="postTitle"
+                    value={this.state.postTitle}
+                    onChange={this.changeHandler}
+                    />
+                    <input
+                    type="number"
+                    placeholder="Engagement Score"
+                    name="engagementScore"
+                    value={this.state.engagementScore}
+                    onChange={this.changeHandler}
+                    />
+                    <input
+                    type="number"
+                    placeholder="Energy Score"
+                    name="energyScore"
+                    value={this.state.energyScore}
+                    onChange={this.changeHandler}
+                    />
+                </div>
+                <div className="form">
+                    <input
+                    type="text"
+                    placeholder="Post"
+                    name="postBody"
+                    value={this.state.postBody}
+                    onChange={this.changeHandler}
+                    />
+                </div>
+            </div> */}
 
 
 
