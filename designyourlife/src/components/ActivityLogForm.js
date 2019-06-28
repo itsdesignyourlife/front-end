@@ -41,31 +41,31 @@ class ActivityLogForm extends Component {
     }
 
 
-    componentDidUpdate(){
-        //reflectionLogPostIds arrays Assignment
+    // componentDidUpdate(){
+    //     //reflectionLogPostIds arrays Assignment
         
-        this.props.getCycleDate(1)
+    //     // this.props.getCycleDate(1)
         
-        if (this.props.endOfWeekCycle === ""){
-            console.log("UPDATE CYCLE DATE TRIGGER")
-            this.props.updateEndOfWeekCycle(1)
-        }
+    //     if (this.props.endOfWeekCycle === ""){
+    //         console.log("UPDATE CYCLE DATE TRIGGER")
+    //         this.props.updateEndOfWeekCycle(1)
+    //     }
 
-        //--------------------------------
-        if (this.props.weekNumber === 0 || this.isDateLaterThanCDate(this.props.endOfWeekCycle, moment().format('L'))){
-            let newWeekNumber = this.props.weekNumber + 1
-            this.props.updateWeekNumber()
-        }
-        // if (this.props.weekNumber === 0){
-        //     return null
-        // }else{
-        //     if (this.props.latestLog[this.props.latestLog.length -1] !== this.props.posts[this.props.posts.length -1].id){
-        //         let idToBePosted = this.props.posts[this.props.posts.length -1].id
-        //         let currentLogNumber = this.props.logs.length
-        //         this.props.createLogEntry(idToBePosted, currentLogNumber)
-        //     }
-        // }
-    }
+    //     //--------------------------------
+    //     // if (this.props.weekNumber === 0 || this.isDateLaterThanCDate(this.props.endOfWeekCycle, moment().format('L'))){
+    //     //     let newWeekNumber = this.props.weekNumber + 1
+    //     //     this.props.updateWeekNumber()
+    //     // }
+    //     // if (this.props.weekNumber === 0){
+    //     //     return null
+    //     // }else{
+    //     //     if (this.props.latestLog[this.props.latestLog.length -1] !== this.props.posts[this.props.posts.length -1].id){
+    //     //         let idToBePosted = this.props.posts[this.props.posts.length -1].id
+    //     //         let currentLogNumber = this.props.logs.length
+    //     //         this.props.createLogEntry(idToBePosted, currentLogNumber)
+    //     //     }
+    //     // }
+    // }
 
     changeHandler = e => {
         e.preventDefault();
@@ -131,56 +131,108 @@ class ActivityLogForm extends Component {
   
 
 
-    render(){
-        return(
-            <div className = "formMainContainer">
-                <div className = "activityLogForm">
-                    <div className = "inputContainer">
-                        <div>
-                            <input
-                                type = "text"
-                                placeholder = "postTitle"
-                                name = "postTitle"
-                                value = {this.state.postTitle}
-                                onChange = {this.changeHandler}
-                            />
-                            <input
-                                type = "number"
-                                placeholder = "engagementScore"
-                                name = "engagementScore"
-                                value = {this.state.engagementScore}
-                                onChange = {this.changeHandler}
-                            />
-                            <input
-                                type = "number"
-                                placeholder = "energyScore"
-                                name = "energyScore"
-                                value = {this.state.energyScore}
-                                onChange = {this.changeHandler}
-                            />
-                        </div>
-                        <div>
-                            <input
-                                type = "text"
-                                placeholder = "postBody"
-                                name = "postBody"
-                                value = {this.state.postBody}
-                                onChange = {this.changeHandler}
-                            />
-                        </div>
-                    </div>
-                    <div>
-                         <button onClick = {this.newPost}>POST!</button>
-                    </div>
-                </div>
+//     render(){
+//         return(
+//             <div className = "formMainContainer">
+//                 <div className = "activityLogForm">
+//                     <div className = "inputContainer">
+//                         <div>
+//                             <input
+//                                 type = "text"
+//                                 placeholder = "postTitle"
+//                                 name = "postTitle"
+//                                 value = {this.state.postTitle}
+//                                 onChange = {this.changeHandler}
+//                             />
+//                             <input
+//                                 type = "number"
+//                                 placeholder = "engagementScore"
+//                                 name = "engagementScore"
+//                                 value = {this.state.engagementScore}
+//                                 onChange = {this.changeHandler}
+//                             />
+//                             <input
+//                                 type = "number"
+//                                 placeholder = "energyScore"
+//                                 name = "energyScore"
+//                                 value = {this.state.energyScore}
+//                                 onChange = {this.changeHandler}
+//                             />
+//                         </div>
+//                         <div>
+//                             <input
+//                                 type = "text"
+//                                 placeholder = "postBody"
+//                                 name = "postBody"
+//                                 value = {this.state.postBody}
+//                                 onChange = {this.changeHandler}
+//                             />
+//                         </div>
+//                     </div>
+//                     <div>
+//                          <button onClick = {this.newPost}>POST!</button>
+//                     </div>
+//                 </div>
                 
 
               
 
                 
+//             </div>
+//         )
+//     }
+// }
+
+render(){
+    return (
+      <div>
+        <div className="activityLogForm inputContainer">
+          <div className="inputContainer">
+            <div className="form"> 
+              <input
+                type="text"
+                placeholder="Title"
+                name="postTitle"
+                value={this.state.postTitle}
+                onChange={this.changeHandler}
+              />
+              <input
+                type="number"
+                placeholder="Engagement Score"
+                name="engagementScore"
+                value={this.state.engagementScore}
+                onChange={this.changeHandler}
+              />
+              <input
+                type="number"
+                placeholder="Energy Score"
+                name="energyScore"
+                value={this.state.energyScore}
+                onChange={this.changeHandler}
+              />
             </div>
-        )
-    }
+            <div className="form form2">
+              <input
+                type="text"
+                placeholder="Post"
+                name="postBody"
+                value={this.state.postBody}
+                onChange={this.changeHandler}
+              />
+            </div>
+          </div>
+          <div className="buttonDiv">
+            <button
+              className="button"
+              onClick={this.newPost}
+            >
+              POST!
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+}
 }
 
 function mapStateToProps(state){
