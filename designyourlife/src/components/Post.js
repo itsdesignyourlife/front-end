@@ -33,7 +33,9 @@ class Post extends Component {
             postBody: this.state.postBody,
             engagementScore: parseInt(this.state.engagementScore, 10),
             energyScore: parseInt(this.state.energyScore, 10),
-            createdAt: moment().format('MMMM Do YYYY, h:mm:ss a')
+            // createdAt: moment().format('MMMM Do YYYY, h:mm:ss a'),
+            postTime: "jdkhf",
+            postDate: "qelh"
         }
         this.props.updatePost(updateId, postObj)
         this.setState({
@@ -82,69 +84,142 @@ class Post extends Component {
     }
 
 
-    render(){
+    // render(){
         
 
-        return(
-            <div className = "post">
-                <div>
-                    <div>
-                        <h1>POST</h1>
-                        <h4>POST TITLE: {this.props.post.postTitle}</h4>
-                        <h5>ENGAGEMENT: {this.props.post.engagementScore}</h5>
-                        <h5>ENERGY: {this.props.post.energyScore}</h5>
-                        <h5>USER_ID: {this.props.post.user_id}</h5>
-                        <h5>ID: {this.props.post.id}</h5>
-                        <h5>TIMESTAMP: {moment().format('L')}</h5>
-                    </div>
-                    <div>
-                        <div>
-                            {this.props.post.postBody}
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <button onClick = {this.deletePost}>DELETE</button>
-                </div>
-                <div className = "inputContainer">
-                <div>
-                    <input
-                        type = "text"
-                        placeholder = "postTitle"
-                        name = "postTitle"
-                        value = {this.state.postTitle}
-                        onChange = {this.changeHandler}
-                    />
-                    <input
-                        type = "number"
-                        placeholder = "engagementScore"
-                        name = "engagementScore"
-                        value = {this.state.engagementScore}
-                        onChange = {this.changeHandler}
-                    />
-                    <input
-                        type = "number"
-                        placeholder = "energyScore"
-                        name = "energyScore"
-                        value = {this.state.energyScore}
-                        onChange = {this.changeHandler}
-                    />
-                </div>
-                <div>
-                    <input
-                        type = "text"
-                        placeholder = "postBody"
-                        name = "postBody"
-                        value = {this.state.postBody}
-                        onChange = {this.changeHandler}
-                    />
-                </div>
-                <button onClick = {this.updatePost}>UPDATE!</button>
-                </div>
+    //     return(
+    //         <div className = "post">
+    //             <div>
+    //                 <div>
+    //                     <h1>POST</h1>
+    //                     <h4>POST TITLE: {this.props.post.postTitle}</h4>
+    //                     <h5>ENGAGEMENT: {this.props.post.engagementScore}</h5>
+    //                     <h5>ENERGY: {this.props.post.energyScore}</h5>
+    //                     <h5>USER_ID: {this.props.post.user_id}</h5>
+    //                     <h5>ID: {this.props.post.id}</h5>
+    //                     <h5>TIMESTAMP: {moment().format('L')}</h5>
+    //                 </div>
+    //                 <div>
+    //                     <div>
+    //                         {this.props.post.postBody}
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //             <div>
+    //                 <button onClick = {this.deletePost}>DELETE</button>
+    //             </div>
+    //             <div className = "inputContainer">
+    //             <div>
+    //                 <input
+    //                     type = "text"
+    //                     placeholder = "postTitle"
+    //                     name = "postTitle"
+    //                     value = {this.state.postTitle}
+    //                     onChange = {this.changeHandler}
+    //                 />
+    //                 <input
+    //                     type = "number"
+    //                     placeholder = "engagementScore"
+    //                     name = "engagementScore"
+    //                     value = {this.state.engagementScore}
+    //                     onChange = {this.changeHandler}
+    //                 />
+    //                 <input
+    //                     type = "number"
+    //                     placeholder = "energyScore"
+    //                     name = "energyScore"
+    //                     value = {this.state.energyScore}
+    //                     onChange = {this.changeHandler}
+    //                 />
+    //             </div>
+    //             <div>
+    //                 <input
+    //                     type = "text"
+    //                     placeholder = "postBody"
+    //                     name = "postBody"
+    //                     value = {this.state.postBody}
+    //                     onChange = {this.changeHandler}
+    //                 />
+    //             </div>
+    //             <button onClick = {this.updatePost}>UPDATE!</button>
+    //             </div>
+    //         </div>
+    //     )
+    // }
+
+    // DORA VVVV
+
+
+    render(){
+            
+
+        return (
+        <div className="post inputContainer">
+            <div>
+            <div className="inputContainer">
+                <h1 className="loginHeader">POST</h1>
+                <h4>POST TITLE: {this.props.post.postTitle}</h4>
+                <h5>ENGAGEMENT: {this.props.post.engagementScore}</h5>
+                <h5>ENERGY: {this.props.post.energyScore}</h5>
+                <h5>USER_ID: {this.props.post.user_id}</h5>
+                <h5>ID: {this.props.post.id}</h5>
+                <h5>TIMESTAMP: {moment().format("L")}</h5>
             </div>
-        )
+            <div>
+                <div>{this.props.post.postBody}</div>
+            </div>
+            </div>
+            <div className="buttonDiv">
+            <button className="button" onClick={this.deletePost}>
+                DELETE
+            </button>
+            </div>
+            <div className="inputContainer">
+            <div className="form">
+                <input
+                type="text"
+                placeholder="Title"
+                name="postTitle"
+                value={this.state.postTitle}
+                onChange={this.changeHandler}
+                />
+                <input
+                type="number"
+                placeholder="Engagement Score"
+                name="engagementScore"
+                value={this.state.engagementScore}
+                onChange={this.changeHandler}
+                />
+                <input
+                type="number"
+                placeholder="Energy Score"
+                name="energyScore"
+                value={this.state.energyScore}
+                onChange={this.changeHandler}
+                />
+            </div>
+            <div className="form">
+                <input
+                type="text"
+                placeholder="Post"
+                name="postBody"
+                value={this.state.postBody}
+                onChange={this.changeHandler}
+                />
+            </div>
+                </div>
+                <div className="buttonDiv">
+            <button className="button" onClick={this.updatePost}>
+            UPDATE!
+            </button>
+                    </div>
+        </div>
+        );
     }
 }
+
+
+
 
 function mapStateToProps(state){
     return {

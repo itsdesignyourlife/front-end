@@ -24,18 +24,36 @@ class Nav extends Component {
     
 
 
-    render(){
-        console.log("NAV PROPS: ", this.props)
-        return(
-            <div className = "navMainContainer">
+    // render(){
+    //     console.log("NAV PROPS: ", this.props)
+    //     return(
+    //         <div className = "navMainContainer">
                  
-                <button onClick = {this.preventRefresh}>Main Page</button>
-                <button onClick = {this.activityLogSwitch}>Activity Log</button>
-                <button onClick = {this.reflectionLogSwitch}>Reflection Log</button>
+    //             <button onClick = {this.preventRefresh}>Main Page</button>
+    //             <button onClick = {this.activityLogSwitch}>Activity Log</button>
+    //             <button onClick = {this.reflectionLogSwitch}>Reflection Log</button>
 
                 
-            </div>
-        )
+    //         </div>
+    //     )
+    // }
+    render(){
+        return (
+          <div className="nav">
+                <h2 className="loginHeader">Good Time Journal</h2>
+                <div className="navigation-bar">
+                    <button className="button" onClick = {this.preventRefresh}>
+                    Main Page
+                    </button>
+                    <button className="button" onClick={this.activityLogSwitch}>
+                    Activity Log
+                    </button>
+                    <button className="button" onClick={this.reflectionLogSwitch}>
+                    Reflection Log
+                    </button>
+                </div>
+          </div>
+        );
     }
 }
 

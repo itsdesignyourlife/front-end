@@ -93,6 +93,64 @@
   font-weight: 600;
 }
 
+.loginbox {
+  width: 30rem;
+  margin: 0 auto;
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
+  box-shadow: 1rem 1rem 5rem rgba(30, 49, 78, 0.14);
+  padding: 3rem 2rem;
+  min-height: 16.5rem;
+  text-align: center;
+}
+
+
+.loginHeader {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #1e314e;
+  line-height: 1.2em;
+  margin: 0;
+  letter-spacing: -0.15rem;
+}
+
+.loginbox p {
+  margin-bottom: 6rem;
+}
+
+#form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form input {
+  margin-bottom: 2rem;
+  height: 3rem;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  padding-left: 0.5rem;
+}
+
+.button {
+  border: 0.5px transparent solid;
+  background-color: #a3e4d7;
+  border-radius: 0.5rem;
+  padding: 1rem 2rem;
+  width: 40%;
+  margin: 0 auto;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #1e314e;
+  text-transform: none;
+  cursor: pointer;  
+  font-weight: 600;
+}
+
 .upperButton {
   margin-bottom: 2rem;
 }
@@ -103,11 +161,10 @@
   border: 0.1rem solid #a3e4d7;
 }
 
-#form {
+.form {
   display: flex;
   flex-direction: column;
 }
-
 
 @media (max-width: 500px){
   .loginbox{
@@ -121,7 +178,7 @@
   .loginHeader {
     font-size: 2rem;
   }
-  #form input {
+  .form input {
     height: 2rem;
   }
   .button {
@@ -134,30 +191,143 @@
 
 /* User CSS */
 
-.userMainContainer {
+/* .userMainContainer {
   border: solid red 1px;
   width: 90vw;
   margin: auto;
-}
+} */
 
 /* ##################################################### */
 
 /* NAV css */
 
-.navMainContainer {
+/* .navMainContainer {
   border: solid green 1px;
   width: 100%;
   display: flex;
   justify-content: space-around;
-}
+} */
 
 /* ############################################## */
 
 /* Form CSS */
 
-.formMainContainer {
+/* .formMainContainer {
   border: solid purple 1px;
   width: 90%;
   margin-top: 20px;
   margin: auto;
+} */
+/* ###################################################### */
+
+
+/* DORA NAVBAR AND ACTIVITYFORM CSS */
+
+.nav {
+  max-width: 60rem;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1vw 0 1vw;
 }
+
+.nav .loginHeader {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  margin-top: 0;
+}
+
+.navigation-bar {
+  display: flex;
+  flex-direction: row;
+}
+
+.navigation-bar button {
+  margin: 1rem;
+  padding: 0.5rem 2rem;
+  background-color: #a3e4d7;
+}
+
+.navigation-bar button:hover {
+  background: white;
+  color: #1e314e;
+  border: 0.1rem solid #a3e4d7;
+}
+
+.inputContainer {
+  max-width: 60rem;
+  border-radius: 0.5rem;
+  margin: 3rem auto;
+  padding: 1rem;
+  background: white;
+  box-shadow: 1rem 1rem 5rem rgba(30, 49, 78, 0.14);
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+h4 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.3rem;
+  color: #1e314e;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+h5 {
+  font-family: "Montserrat", sans-serif;
+  /* font-weight: 300; */
+  letter-spacing: -0.05rem;
+  color: #1e314e;
+  /* line-height: 1.2em; */
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.activityLogForm {
+  max-width: 60rem;
+  margin: 2rem auto;
+}
+
+
+.buttonPost:hover {
+  background: white;
+  color: #1e314e;
+  border: 0.1rem solid #a3e4d7;
+}
+
+.form2 input {
+  height: 6rem;
+}
+
+@media (max-width: 500px){
+  .nav{
+    width: 80%;
+    margin: 3rem auto;
+  }
+  .inputContainer {
+    width: 80%;
+    margin: 3rem auto;
+  }
+  .button {
+    padding: 1rem 1rem;
+    font-size: 1rem;
+  }
+}
+
+.post {
+  margin: 3rem auto;
+}
+
+.buttonDiv {
+  max-width: 60rem;
+  display: flex;
+  justify-content: center;
+}
+/* #############################################3*/
+
