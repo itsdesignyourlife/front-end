@@ -5,10 +5,10 @@ import {connect} from "react-redux";
 
 
 class Nav extends Component {
-    
-
-    preventRefresh = e => {
+    landingPage = e => {
         e.preventDefault()
+        localStorage.clear();
+        window.location.href = 'https://designyourlifejournal.netlify.com/';
     }
 
     activityLogSwitch = e => {
@@ -21,36 +21,28 @@ class Nav extends Component {
         this.props.reflectionViewToggle(true)
     }
 
+    logOut = e => {
+        e.preventDefault()
+        localStorage.clear();
+        window.location.reload();
+    }
+
     
-
-
-    // render(){
-    //     console.log("NAV PROPS: ", this.props)
-    //     return(
-    //         <div className = "navMainContainer">
-                 
-    //             <button onClick = {this.preventRefresh}>Main Page</button>
-    //             <button onClick = {this.activityLogSwitch}>Activity Log</button>
-    //             <button onClick = {this.reflectionLogSwitch}>Reflection Log</button>
-
-                
-    //         </div>
-    //     )
-    // }
     render(){
         return (
           <div className="nav">
                 <h2 className="loginHeader">Good Time Journal</h2>
                 <div className="navigation-bar">
-                    <button className="button" onClick = {this.preventRefresh}>
+                    <button className="button" onClick = {this.landingPage}>
                     Main Page
                     </button>
                     <button className="button" onClick={this.activityLogSwitch}>
-                    Activity Log
+                    Daily Activity Log
                     </button>
                     <button className="button" onClick={this.reflectionLogSwitch}>
-                    Reflection Log
+                    Weekly Reflection Log
                     </button>
+                    <button className = "button" onClick = {this.logOut}>Logout</button>
                 </div>
           </div>
         );

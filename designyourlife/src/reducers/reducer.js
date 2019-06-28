@@ -7,12 +7,11 @@ import {
     GETUSERPOSTS_START, GETUSERPOSTS_SUCCESS, GETUSERPOSTS_FAILURE,
     UPDATE_START, UPDATE_SUCCESS, UPDATE_FAILURE,
     DELETE_START, DELETE_SUCCESS, DELETE_FAILURE, 
-    NEW_CYCLE_UPDATE_START, NEW_CYCLE_UPDATE_SUCCESS, NEW_CYCLE_UPDATE_FAILURE,
-    CREATELOG_START, CREATELOG_SUCCESS, CREATELOG_FAILURE,
-    CREATELOGENTRY_START, CREATELOGENTRY_SUCCESS, CREATELOGENTRY_FAILURE,
-    GETCYCLEDATE_START, GETCYCLEDATE_SUCCESS, GETCYCLEDATE_FAILURE,
-    GETWEEKNUMBER_START, GETWEEKNUMBER_SUCCESS, GETWEEKNUMBER_FAILURE,
-    WEEKNUMBERUPDATE_START, WEEKNUMBERUPDATE_SUCCESS, WEEKNUMBERUPDATE_FAILURE,} from '../actions/actions';
+    REFPOST_START, REFPOST_SUCCESS, REFPOST_FAILURE, 
+    UPDATEREF_START, UPDATEREF_SUCCESS, UPDATEREF_FAILURE,
+    GETUSERREFS_START, GETUSERREFS_SUCCESS, GETUSERREFS_FAILURE,
+    DELETEREF_START, DELETEREF_SUCCESS, DELETEREF_FAILURE, 
+    } from '../actions/actions';
 
     
     
@@ -29,11 +28,11 @@ let defaultState = {
     registeringError: "",
     gettingUserPosts: false,
     gettingUserPostsError: "",
+    reflections: [],
+    registered: false
 
     //NEED TO BE CREATED
 
-    endOfWeekCycle: "",
-    weekNumber: ""
 }
 
 export default function reducer (state = defaultState, action) {
@@ -68,6 +67,7 @@ export default function reducer (state = defaultState, action) {
             return {
                 ...state,
                 registering: false,
+                registered: true
             }           
         case REGISTER_FAILURE:
             return {
@@ -161,100 +161,64 @@ export default function reducer (state = defaultState, action) {
                 ...state
             }
          //################################
-         case NEW_CYCLE_UPDATE_START:
+
+         case REFPOST_START:
             return {
                 ...state
             }           
-        case NEW_CYCLE_UPDATE_SUCCESS:
+        case REFPOST_SUCCESS:
             return {
                 ...state,
-                endOfWeekCycle: "" //action.payload <<<<<<<<<<<<<<<<<<<<<<<<<<<<
+                reflections: action.payload
             }           
-        case NEW_CYCLE_UPDATE_FAILURE:
+        case REFPOST_FAILURE:
             return {
                 ...state
             }
-
-        //##################################
+         //################################
         
-        case CREATELOG_START:
+         case UPDATEREF_START:
             return {
                 ...state
             }           
-        case CREATELOG_SUCCESS:
+        case UPDATEREF_SUCCESS:
             return {
                 ...state,
-                logs: "" //<---------------------------action.payload
+                reflections: action.payload
             }           
-        case CREATELOG_FAILURE:
+        case UPDATEREF_FAILURE:
             return {
                 ...state
             }
-
-        //##################################
-        
-        case CREATELOGENTRY_START:
+         //################################
+         case GETUSERREFS_START:
             return {
                 ...state
             }           
-        case CREATELOGENTRY_SUCCESS:
+        case GETUSERREFS_SUCCESS:
             return {
                 ...state,
-                logs: "" //<---------------------------action.payload
+                reflections: action.payload
             }           
-        case CREATELOGENTRY_FAILURE:
+        case GETUSERREFS_FAILURE:
             return {
                 ...state
             }
-        //#######################################
-
-        case GETCYCLEDATE_START:
+         //################################
+        case DELETEREF_START:
             return {
                 ...state
             }           
-        case GETCYCLEDATE_SUCCESS:
+        case DELETEREF_SUCCESS:
             return {
                 ...state,
-                // endOfWeekCycle: action.payload //<---------------------------action.payload
+                // reflections: action.payload
             }           
-        case GETCYCLEDATE_FAILURE:
+        case DELETEREF_FAILURE:
             return {
                 ...state
             }
-        //#######################################
-
-        case GETWEEKNUMBER_START:
-            return {
-                ...state
-            }           
-        case GETWEEKNUMBER_SUCCESS:
-            return {
-                ...state,
-                // endOfWeekCycle: action.payload //<---------------------------action.payload
-            }           
-        case GETWEEKNUMBER_FAILURE:
-            return {
-                ...state
-            }
-
-        //#############################################
-
-        case WEEKNUMBERUPDATE_START:
-            return {
-                ...state
-            }           
-        case WEEKNUMBERUPDATE_SUCCESS:
-            return {
-                ...state,
-                // endOfWeekCycle: action.payload //<---------------------------action.payload
-            }           
-        case WEEKNUMBERUPDATE_FAILURE:
-            return {
-                ...state
-            }
-    
-            
-
+         //################################
             
     
         default:
